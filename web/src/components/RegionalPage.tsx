@@ -51,6 +51,10 @@ export default function RegionalPage({
     byPref[pref].push(f);
   }
 
+  // Regional recommendations (random 3 with photos)
+  const withPhotos = dining.filter((f) => f.image_url && f.total_score && f.total_score >= 3.0);
+  const recommended = [...withPhotos].sort(() => Math.random() - 0.5).slice(0, 3);
+
   return (
     <div>
       {/* Hero */}
@@ -100,6 +104,37 @@ export default function RegionalPage({
         </section>
       ) : (
         <>
+          {/* Regional Recommendations */}
+          {recommended.length > 0 && (
+            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+              <div className="mb-8">
+                <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">{regionNameEn} Pick</p>
+                <h2 className="font-serif text-2xl text-[var(--color-text)]">{regionName}のおすすめ</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                {recommended.map((f: any, idx: number) => (
+                  <Link key={f.id} href={`/facilities/${f.id}`} className="group block bg-white border border-[var(--color-border)] rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+                    <div className="aspect-[16/9] relative overflow-hidden">
+                      {f.image_url && (
+                        <Image src={f.image_url} alt={f.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="33vw" unoptimized />
+                      )}
+                      {!f.image_url && (
+                        <div className="absolute inset-0 flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${seedColors[idx % 12]}40, ${seedColors[(idx+5) % 12]}40)` }}>
+                          <span className="font-serif text-4xl" style={{ color: `${seedColors[(idx+2) % 12]}50` }}>{f.name.charAt(0)}</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-serif text-lg text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors mb-1">{f.name}</h3>
+                      <p className="text-xs text-[var(--color-text-muted)] mb-2">{f.prefecture} {f.city}</p>
+                      <p className="text-sm text-[var(--color-text-muted)] leading-relaxed line-clamp-2">{f.overview}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
           {Object.entries(byPref)
             .sort(([, a], [, b]) => b.length - a.length)
             .map(([pref, list]) => (

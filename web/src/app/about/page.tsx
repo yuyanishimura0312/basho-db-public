@@ -70,6 +70,20 @@ export default function AboutPage() {
           AIエージェントが8軸のフレームワークに基づいて各施設の場所性を評価し、
           あなたが求める場所性を持つ施設との出会いを実現します。
         </p>
+
+        <div className="not-prose mt-12 p-6 bg-miratuku-pale-peach/20 rounded-lg border border-[var(--color-border)]">
+          <h3 className="font-serif text-xl text-[var(--color-accent)] mb-3">場所性レポート</h3>
+          <p className="text-sm text-[var(--color-text-muted)] mb-4">
+            場所性の理論的基盤について、西田幾多郎、ブルデュー、トゥアン、レルフなどの
+            学術的知見を統合した10,000字の詳細レポートをお読みいただけます。
+          </p>
+          <a
+            href="/report-bashosei.html"
+            className="inline-block bg-[var(--color-accent)] text-white px-6 py-2.5 text-sm rounded hover:bg-[var(--color-accent-light)] transition-colors"
+          >
+            レポートを読む
+          </a>
+        </div>
       </div>
     </div>
   );

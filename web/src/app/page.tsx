@@ -24,9 +24,12 @@ const topScored = [...dining]
   .sort((a, b) => (b.total_score ?? 0) - (a.total_score ?? 0))
   .slice(0, 6);
 
-// Random 3 recommendations (with photos preferred)
-const withPhotos = dining.filter((f) => f.image_url && f.total_score && f.total_score >= 3.5);
-const shuffled = [...withPhotos].sort(() => Math.random() - 0.5);
+// Random 3 recommendations from Kanto (with photos preferred)
+const kantoPrefs = ["東京都","神奈川県","千葉県","埼玉県","群馬県","栃木県","茨城県"];
+const kantoWithPhotos = dining.filter(
+  (f) => f.image_url && f.total_score && f.total_score >= 3.5 && kantoPrefs.includes(f.prefecture || "")
+);
+const shuffled = [...kantoWithPhotos].sort(() => Math.random() - 0.5);
 const recommended = shuffled.slice(0, 3);
 
 const categoryLabels: Record<string, string> = {
@@ -339,6 +342,11 @@ export default function Home() {
                 <p className="text-sm text-white/90">{axis}</p>
               </div>
             ))}
+          </div>
+          <div className="mt-6 text-center">
+            <Link href="/about" className="text-sm text-white/60 hover:text-white transition-colors">
+              場所性について詳しく見る →
+            </Link>
           </div>
         </div>
       </section>

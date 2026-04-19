@@ -73,10 +73,10 @@ export default function RootLayout({
                 宿
               </Link>
               <Link
-                href="/dashboard"
+                href="/guide"
                 className="text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
               >
-                ダッシュボード
+                使い方
               </Link>
               <Link
                 href="/about"
