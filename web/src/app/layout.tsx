@@ -51,12 +51,18 @@ export default function RootLayout({
                 </span>
               </div>
             </Link>
-            <div className="flex items-center gap-8 text-sm tracking-wide">
+            <div className="flex items-center gap-6 text-sm tracking-wide">
               <Link
                 href="/facilities"
                 className="text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
               >
-                施設を探す
+                食を探す
+              </Link>
+              <Link
+                href="/stays"
+                className="text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
+              >
+                宿を探す
               </Link>
               <Link
                 href="/dashboard"

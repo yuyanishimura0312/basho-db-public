@@ -12,23 +12,32 @@ const categoryLabels: Record<string, string> = {
 };
 
 export default function FacilitiesPage() {
-  const sorted = [...facilities].sort((a, b) => {
+  // Filter to dining only (exclude hotels, ryokan, minshuku)
+  const dining = facilities.filter(
+    (f) => !["hotel", "ryokan", "minshuku"].includes(f.category)
+  );
+
+  const sorted = [...dining].sort((a, b) => {
+    if (a.total_score != null && b.total_score != null)
+      return (b.total_score ?? 0) - (a.total_score ?? 0);
+    if (a.total_score != null) return -1;
+    if (b.total_score != null) return 1;
     if (a.founded_year && b.founded_year) return a.founded_year - b.founded_year;
     if (a.founded_year) return -1;
     if (b.founded_year) return 1;
     return 0;
   });
 
-  const categories = Array.from(new Set(facilities.map((f) => f.category)));
-  const prefectures = Array.from(new Set(facilities.map((f) => f.prefecture).filter(Boolean)));
+  const categories = Array.from(new Set(dining.map((f) => f.category)));
+  const prefectures = Array.from(new Set(dining.map((f) => f.prefecture).filter(Boolean)));
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header */}
       <div className="mb-10">
-        <p className="text-xs tracking-[0.3em] text-stone-400 mb-2 uppercase">All Facilities</p>
-        <h1 className="font-serif text-3xl md:text-4xl text-stone-900 mb-4">施設一覧</h1>
-        <p className="text-stone-500">{facilities.length}件の施設</p>
+        <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">Dining</p>
+        <h1 className="font-serif text-3xl md:text-4xl text-[var(--color-text)] mb-4">食を探す</h1>
+        <p className="text-[var(--color-text-muted)]">{sorted.length}件の飲食店</p>
       </div>
 
       {/* Filter Tags */}
