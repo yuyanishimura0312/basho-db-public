@@ -12,9 +12,12 @@ const categoryLabels: Record<string, string> = {
 };
 
 export default function FacilitiesPage() {
-  // Filter to dining only (exclude hotels, ryokan, minshuku)
+  const kantoPrefs = ["東京都","神奈川県","千葉県","埼玉県","群馬県","栃木県","茨城県"];
+
+  // Filter to Kanto dining only
   const dining = facilities.filter(
     (f) => !["hotel", "ryokan", "minshuku"].includes(f.category)
+      && kantoPrefs.includes(f.prefecture || "")
   );
 
   const sorted = [...dining].sort((a, b) => {
@@ -35,8 +38,8 @@ export default function FacilitiesPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header */}
       <div className="mb-10">
-        <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">Dining</p>
-        <h1 className="font-serif text-3xl md:text-4xl text-[var(--color-text)] mb-4">食を探す</h1>
+        <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">Kanto Dining</p>
+        <h1 className="font-serif text-3xl md:text-4xl text-[var(--color-text)] mb-4">関東の食</h1>
         <p className="text-[var(--color-text-muted)]">{sorted.length}件の飲食店</p>
       </div>
 
