@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import facilities from "@/data/facilities.json";
 import stats from "@/data/stats.json";
 
@@ -117,15 +118,22 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayFacilities.map((f, idx) => (
             <Link key={f.id} href={`/facilities/${f.id}`} className="group block">
-              {/* Image area with Miratuku seed color accent */}
+              {/* Image card */}
               <div className="aspect-[4/3] bg-miratuku-pale-peach/30 mb-4 overflow-hidden relative rounded-lg">
-                <div
-                  className="absolute inset-0 opacity-10"
-                  style={{
-                    background: `linear-gradient(135deg, ${seedColors[idx % 12]} 0%, ${seedColors[(idx + 4) % 12]} 100%)`,
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-accent)]/60 to-transparent" />
+                {/* Photo */}
+                {f.image_url && (
+                  <Image
+                    src={f.image_url}
+                    alt={f.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    unoptimized
+                  />
+                )}
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-accent)]/70 via-transparent to-transparent" />
+                {/* Score & info */}
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <div className="flex items-center gap-2">
                     {f.total_score != null && (
@@ -139,15 +147,17 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-                {/* Visual placeholder */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span
-                    className="font-serif text-6xl opacity-20"
-                    style={{ color: seedColors[(idx + 2) % 12] }}
-                  >
-                    {f.name.charAt(0)}
-                  </span>
-                </div>
+                {/* Fallback initial if no image */}
+                {!f.image_url && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span
+                      className="font-serif text-6xl opacity-20"
+                      style={{ color: seedColors[(idx + 2) % 12] }}
+                    >
+                      {f.name.charAt(0)}
+                    </span>
+                  </div>
+                )}
               </div>
               <h3 className="font-serif text-xl text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors mb-2">
                 {f.name}
