@@ -51,19 +51,21 @@ export default function RootLayout({
                 </span>
               </div>
             </Link>
-            <div className="flex items-center gap-5 text-sm tracking-wide">
-              <Link
-                href="/facilities"
-                className="text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
-              >
-                関東の食
-              </Link>
-              <Link
-                href="/kansai"
-                className="text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
-              >
-                関西の食
-              </Link>
+            <div className="flex items-center gap-4 text-sm tracking-wide">
+              {/* Region links */}
+              <div className="group relative">
+                <span className="text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors cursor-pointer">
+                  エリア別
+                </span>
+                <div className="absolute top-full left-0 mt-2 bg-white border border-[var(--color-border)] rounded-lg shadow-lg py-2 w-44 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                  <Link href="/facilities" className="block px-4 py-2 text-[var(--color-text-muted)] hover:bg-miratuku-pale-peach/20 hover:text-[var(--color-accent)]">関東</Link>
+                  <Link href="/kansai" className="block px-4 py-2 text-[var(--color-text-muted)] hover:bg-miratuku-pale-peach/20 hover:text-[var(--color-accent)]">関西</Link>
+                  <Link href="/chubu" className="block px-4 py-2 text-[var(--color-text-muted)] hover:bg-miratuku-pale-peach/20 hover:text-[var(--color-accent)]">中部・北陸</Link>
+                  <Link href="/hokkaido-tohoku" className="block px-4 py-2 text-[var(--color-text-muted)] hover:bg-miratuku-pale-peach/20 hover:text-[var(--color-accent)]">北海道・東北</Link>
+                  <Link href="/chugoku-shikoku" className="block px-4 py-2 text-[var(--color-text-muted)] hover:bg-miratuku-pale-peach/20 hover:text-[var(--color-accent)]">中国・四国</Link>
+                  <Link href="/kyushu" className="block px-4 py-2 text-[var(--color-text-muted)] hover:bg-miratuku-pale-peach/20 hover:text-[var(--color-accent)]">九州・沖縄</Link>
+                </div>
+              </div>
               <Link
                 href="/stays"
                 className="text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
