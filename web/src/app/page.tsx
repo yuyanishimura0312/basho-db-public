@@ -9,27 +9,37 @@ const seedColors = [
   "#EFC4A4", "#F7BEA2", "#DC8766", "#B07256", "#966D5E", "#7A4033",
 ];
 
-// Top scored facilities
-const topScored = [...facilities]
+// Dining only (exclude hotels, ryokan, minshuku)
+const dining = facilities.filter(
+  (f) => !["hotel", "ryokan", "minshuku"].includes(f.category)
+);
+
+const diningStats = {
+  total: dining.length,
+  prefectures: new Set(dining.map((f) => f.prefecture).filter(Boolean)).size,
+};
+
+// Top scored dining
+const topScored = [...dining]
   .filter((f) => f.total_score != null)
   .sort((a, b) => (b.total_score ?? 0) - (a.total_score ?? 0))
   .slice(0, 6);
 
-// Historic featured
-const featured = facilities
-  .filter((f) => f.founded_year && f.founded_year < 1900 && f.overview)
-  .slice(0, 6);
-
-const displayFacilities = topScored.length >= 3 ? topScored : featured;
+const displayFacilities = topScored;
 
 const categoryLabels: Record<string, string> = {
   restaurant_japanese: "和食",
   restaurant_western: "洋食",
   restaurant_cafe: "カフェ・喫茶",
-  hotel: "ホテル",
-  ryokan: "旅館",
-  minshuku: "民宿",
 };
+
+// Dining-only category stats
+const diningCategories: Record<string, number> = {};
+for (const f of dining) {
+  const cat = f.category;
+  diningCategories[cat] = (diningCategories[cat] || 0) + 1;
+}
+const sortedCategories = Object.entries(diningCategories).sort(([, a], [, b]) => b - a);
 
 export default function Home() {
   return (
@@ -62,24 +72,24 @@ export default function Home() {
           <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-tight tracking-wide text-white mb-6">
             場所の記憶を辿り、
             <br />
-            まだ見ぬ食と宿に出会う
+            まだ見ぬ食に出会う
           </h1>
           <p className="text-white/70 text-lg md:text-xl max-w-2xl leading-relaxed mb-10">
             トレンドでも口コミでもない。歴史と文化が堆積した「場所性」という
-            新しい軸で、あなたにふさわしい飲食店・宿泊施設を見つける。
+            新しい軸で、あなたにふさわしいレストラン・カフェ・バーを見つける。
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
               href="/facilities"
               className="inline-block bg-white text-[var(--color-accent)] px-8 py-3.5 text-sm font-medium tracking-wider hover:bg-white/90 transition-colors rounded"
             >
-              施設を探す
+              食を探す
             </Link>
             <Link
-              href="/about"
+              href="/stays"
               className="inline-block border border-white/40 text-white px-8 py-3.5 text-sm tracking-wider hover:border-white/70 hover:bg-white/10 transition-colors rounded"
             >
-              場所性とは
+              宿を探す
             </Link>
           </div>
         </div>
@@ -90,8 +100,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
-              { val: stats.total, label: "施設" },
-              { val: Object.keys(stats.by_prefecture).length, label: "都道府県" },
+              { val: diningStats.total, label: "飲食店" },
+              { val: diningStats.prefectures, label: "都道府県" },
               { val: "8", label: "評価軸" },
               { val: stats.oldest_year || "—", label: "最古の創業年" },
             ].map((s, i) => (
@@ -108,10 +118,10 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
         <div className="mb-12">
           <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">
-            {topScored.length >= 3 ? "Highest Rated" : "Featured"}
+            Highest Rated
           </p>
           <h2 className="font-serif text-3xl md:text-4xl text-[var(--color-text)]">
-            {topScored.length >= 3 ? "場所性スコアが高い施設" : "場所性が際立つ施設"}
+            場所性スコアが高い飲食店
           </h2>
         </div>
 
@@ -184,7 +194,7 @@ export default function Home() {
             href="/facilities"
             className="inline-block border border-[var(--color-accent)]/30 text-[var(--color-accent)] px-8 py-3 text-sm tracking-wider hover:bg-[var(--color-accent)] hover:text-white transition-colors rounded"
           >
-            すべての施設を見る
+            すべての飲食店を見る
           </Link>
         </div>
       </section>
@@ -238,7 +248,7 @@ export default function Home() {
           <h2 className="font-serif text-3xl md:text-4xl text-[var(--color-text)]">カテゴリ別に探す</h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {Object.entries(stats.by_category).map(([cat, count], idx) => (
+          {sortedCategories.map(([cat, count], idx) => (
             <Link
               key={cat}
               href={`/facilities?category=${cat}`}
