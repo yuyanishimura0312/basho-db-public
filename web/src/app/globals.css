@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-serif: var(--font-serif-jp);
+  --font-sans: var(--font-sans-jp);
+
+  /* Miratuku CI Colors */
+  --color-miratuku-golden-orange: #F0A671;
+  --color-miratuku-light-beige: #F2C792;
+  --color-miratuku-warm-beige: #F1C189;
+  --color-miratuku-camel: #CEA26F;
+  --color-miratuku-pale-peach: #F8CDAC;
+  --color-miratuku-sand-gold: #F0BE83;
+  --color-miratuku-soft-salmon: #EFC4A4;
+  --color-miratuku-rose-peach: #F7BEA2;
+  --color-miratuku-terracotta: #DC8766;
+  --color-miratuku-amber-brown: #B07256;
+  --color-miratuku-warm-brown: #966D5E;
+  --color-miratuku-deep-brown: #7A4033;
+
+  --color-accent: #783c28;
+  --color-accent-light: #964d33;
+  --color-bg: #faf8f5;
+  --color-text: #1a1a1a;
+  --color-text-muted: #6b5c52;
+  --color-border: #e8ddd4;
+  --color-card: #ffffff;
+}
+
+body {
+  font-family: var(--font-sans-jp), sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+.font-serif {
+  font-family: var(--font-serif-jp), serif;
+}
+
+/* Miratuku seed gradient for decorative elements */
+.miratuku-gradient {
+  background: linear-gradient(135deg, #F0A671 0%, #DC8766 30%, #B07256 60%, #7A4033 100%);
+}
+
+.miratuku-gradient-light {
+  background: linear-gradient(135deg, #F8CDAC 0%, #F2C792 30%, #F1C189 60%, #EFC4A4 100%);
+}
