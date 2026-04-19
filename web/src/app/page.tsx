@@ -18,12 +18,6 @@ const diningStats = {
   prefectures: new Set(dining.map((f) => f.prefecture).filter(Boolean)).size,
 };
 
-// Top scored dining
-const topScored = [...dining]
-  .filter((f) => f.total_score != null)
-  .sort((a, b) => (b.total_score ?? 0) - (a.total_score ?? 0))
-  .slice(0, 6);
-
 // Random 3 recommendations from Kanto (with photos preferred)
 const kantoPrefs = ["東京都","神奈川県","千葉県","埼玉県","群馬県","栃木県","茨城県"];
 const kantoWithPhotos = dining.filter(
@@ -282,39 +276,73 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Top Scored */}
+      {/* AI Search & Features */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="mb-8">
-          <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">Highest Rated</p>
-          <h2 className="font-serif text-2xl md:text-3xl text-[var(--color-text)]">場所性スコアが高い飲食店</h2>
+        {/* AI Search */}
+        <div className="mb-12">
+          <div className="mb-6">
+            <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">AI Search</p>
+            <h2 className="font-serif text-2xl md:text-3xl text-[var(--color-text)]">場所性で探す</h2>
+            <p className="text-sm text-[var(--color-text-muted)] mt-2">シーンや気分を入力すると、AIが場所性の観点からおすすめを提案します</p>
+          </div>
+          <div className="bg-white border border-[var(--color-border)] rounded-lg p-6">
+            <div className="flex gap-3">
+              <input
+                type="text"
+                placeholder="例: 「明治の洋館で特別な記念日ディナー」「文豪が愛した静かな純喫茶」「パリ仕込みの本格クロワッサン」"
+                className="flex-1 px-4 py-3 border border-[var(--color-border)] rounded-lg text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)]/40 focus:outline-none focus:border-[var(--color-accent)]"
+                disabled
+              />
+              <button
+                className="px-6 py-3 bg-[var(--color-accent)] text-white text-sm rounded-lg opacity-60 cursor-not-allowed"
+                disabled
+              >
+                検索
+              </button>
+            </div>
+            <p className="text-xs text-[var(--color-text-muted)]/50 mt-3">Coming Soon — AI検索機能は現在開発中です</p>
+          </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {topScored.map((f, idx) => (
-            <Link key={f.id} href={`/facilities/${f.id}`} className="group block">
-              <div className="aspect-[4/3] bg-miratuku-pale-peach/30 mb-4 overflow-hidden relative rounded-lg">
-                {f.image_url && (
-                  <Image src={f.image_url} alt={f.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" unoptimized />
-                )}
-                {!f.image_url && (
-                  <div className="absolute inset-0 flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${seedColors[idx % 12]}30, ${seedColors[(idx+5) % 12]}30)` }}>
-                    <span className="font-serif text-5xl" style={{ color: `${seedColors[(idx+2) % 12]}40` }}>{f.name.charAt(0)}</span>
-                  </div>
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-accent)]/60 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <div className="flex items-center gap-2">
-                    {f.total_score != null && (
-                      <span className="text-xs px-2 py-0.5 bg-white/90 text-[var(--color-accent)] rounded font-medium">{(f.total_score as unknown as number).toFixed(1)}</span>
-                    )}
-                    <p className="text-white/80 text-xs tracking-wider">{f.founded_year ? `${f.founded_year}年` : ""}{f.prefecture ? ` / ${f.prefecture}` : ""}</p>
-                  </div>
+
+        {/* Feature Reports */}
+        <div>
+          <div className="mb-6">
+            <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">Feature</p>
+            <h2 className="font-serif text-2xl md:text-3xl text-[var(--color-text)]">特集</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <a href="/report-bashosei.html" className="group block bg-white border border-[var(--color-border)] rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+              <div className="aspect-[2/1] relative miratuku-gradient flex items-center justify-center">
+                <div className="text-center text-white p-6">
+                  <p className="text-xs tracking-widest text-white/60 mb-2">REPORT</p>
+                  <p className="font-serif text-xl">場所性（Basho-sei）とは何か</p>
                 </div>
               </div>
-              <h3 className="font-serif text-lg text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors mb-1">{f.name}</h3>
-              <p className="text-sm text-[var(--color-text-muted)] leading-relaxed line-clamp-2">{f.overview}</p>
+              <div className="p-5">
+                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
+                  西田幾多郎の場所論、ブルデューの文化資本、現象学的場所論を統合した
+                  「場所性」の理論的基盤と8軸評価フレームワークについての詳細レポート。
+                </p>
+              </div>
+            </a>
+            <Link href="/about" className="group block bg-white border border-[var(--color-border)] rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+              <div className="aspect-[2/1] relative flex items-center justify-center"
+                style={{ background: "linear-gradient(135deg, #966D5E 0%, #7A4033 100%)" }}>
+                <div className="text-center text-white p-6">
+                  <p className="text-xs tracking-widest text-white/60 mb-2">ABOUT</p>
+                  <p className="font-serif text-xl">場所性の8軸フレームワーク</p>
+                </div>
+              </div>
+              <div className="p-5">
+                <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
+                  歴史的継続性、文化的営みの深度、地域的固有性、本物性 —
+                  飲食店・宿泊施設の場所性を評価する8つの軸の解説。
+                </p>
+              </div>
             </Link>
-          ))}
+          </div>
         </div>
+
         <div className="mt-10 text-center">
           <Link href="/facilities" className="inline-block border border-[var(--color-accent)]/30 text-[var(--color-accent)] px-8 py-3 text-sm tracking-wider hover:bg-[var(--color-accent)] hover:text-white transition-colors rounded">
             すべての飲食店を見る
