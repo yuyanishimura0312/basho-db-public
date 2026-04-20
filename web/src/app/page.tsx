@@ -69,14 +69,14 @@ for (const f of dining) {
 }
 
 const themes = [
-  { name: "老舗 (100年以上)", emoji: "🏯", desc: "創業100年を超える歴史を持つ名店", filter: "centenarian" },
-  { name: "発祥の店", emoji: "⭐", desc: "「元祖」「発祥」の称号を持つ店", filter: "origin" },
-  { name: "文化財の建物", emoji: "🏛", desc: "登録有形文化財・重要文化財の建物", filter: "heritage" },
-  { name: "文豪ゆかりの店", emoji: "📖", desc: "文学者や著名人が愛した場所", filter: "literary" },
-  { name: "フレンチ & イタリアン", emoji: "🍷", desc: "ヨーロッパの食文化を伝える名店", filter: "european" },
-  { name: "純喫茶 & カフェ", emoji: "☕", desc: "珈琲文化と場所性が交差する空間", filter: "kissaten" },
-  { name: "パン & 洋菓子", emoji: "🥐", desc: "ベーカリー・パティスリーの名店", filter: "bakery" },
-  { name: "バー & 酒文化", emoji: "🥃", desc: "カクテル、ワイン、日本酒の場所性", filter: "bar" },
+  { name: "老舗 (100年以上)", glyph: "歴", desc: "創業100年を超える歴史を持つ名店", filter: "centenarian" },
+  { name: "発祥の店", glyph: "祖", desc: "「元祖」「発祥」の称号を持つ店", filter: "origin" },
+  { name: "文化財の建物", glyph: "財", desc: "登録有形文化財・重要文化財の建物", filter: "heritage" },
+  { name: "文豪ゆかりの店", glyph: "文", desc: "文学者や著名人が愛した場所", filter: "literary" },
+  { name: "フレンチ & イタリアン", glyph: "欧", desc: "ヨーロッパの食文化を伝える名店", filter: "european" },
+  { name: "純喫茶 & カフェ", glyph: "珈", desc: "珈琲文化と場所性が交差する空間", filter: "kissaten" },
+  { name: "パン & 洋菓子", glyph: "菓", desc: "ベーカリー・パティスリーの名店", filter: "bakery" },
+  { name: "バー & 酒文化", glyph: "酒", desc: "カクテル、ワイン、日本酒の場所性", filter: "bar" },
 ];
 
 const currentYear = new Date().getFullYear();
@@ -238,14 +238,14 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-2 gap-3">
             {[
-              { emoji: "🏛", text: "歴史ある空間で\n特別なひとときを" },
-              { emoji: "📖", text: "文豪が愛した\n静かな隠れ家を" },
-              { emoji: "🏮", text: "下町情緒あふれる\n庶民の味を" },
-              { emoji: "✨", text: "モダンな空間で\n新しい食体験を" },
+              { glyph: "歴", text: "歴史ある空間で\n特別なひとときを" },
+              { glyph: "文", text: "文豪が愛した\n静かな隠れ家を" },
+              { glyph: "町", text: "下町情緒あふれる\n庶民の味を" },
+              { glyph: "新", text: "モダンな空間で\n新しい食体験を" },
             ].map((opt, i) => (
               <Link key={i} href="/facilities"
                 className="border border-[var(--color-border)] bg-white p-5 text-sm leading-relaxed hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-white transition-all group">
-                <span className="text-2xl block mb-2 group-hover:scale-110 inline-block transition-transform">{opt.emoji}</span>
+                <span className="font-serif text-xl text-[var(--color-accent)]/25 group-hover:text-white/40 block mb-2 transition-colors">{opt.glyph}</span>
                 <span className="whitespace-pre-line">{opt.text}</span>
               </Link>
             ))}
@@ -296,8 +296,8 @@ export default function Home() {
           {themes.map((theme, i) => (
             <Link key={i} href={`/facilities?theme=${theme.filter}`}
               className="group border border-[var(--color-border)] bg-white p-6 hover:border-[var(--color-accent)]/40 transition-colors">
-              <span className="text-[2.5rem] block mb-4 group-hover:scale-[1.2] group-hover:rotate-[-5deg] transition-transform inline-block">
-                {theme.emoji}
+              <span className="font-serif text-[2rem] text-[var(--color-accent)]/15 group-hover:text-[var(--color-accent)]/30 block mb-3 leading-none transition-colors">
+                {theme.glyph}
               </span>
               <h3 className="font-serif text-sm group-hover:text-[var(--color-accent)] transition-colors mb-1">{theme.name}</h3>
               <p className="text-[0.72rem] text-[var(--color-text-muted)] leading-relaxed">{theme.desc}</p>
