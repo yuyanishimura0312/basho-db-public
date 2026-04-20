@@ -66,7 +66,7 @@ export default async function FacilityPage({
       <section
         className="relative min-h-[45vh] md:min-h-[55vh] flex items-end"
         style={{
-          background: `linear-gradient(135deg, ${seedColors[idx % 12]} 0%, ${seedColors[(idx + 5) % 12]} 50%, #7A4033 100%)`,
+          background: "linear-gradient(170deg, #1a5c6e 0%, #144a59 40%, #0d3a47 70%, #0a2e38 100%)",
         }}
       >
         {/* Background image if available */}
@@ -88,26 +88,26 @@ export default async function FacilityPage({
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-accent)]/90 via-[var(--color-accent)]/30 to-transparent" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
           <div className="flex flex-wrap items-center gap-2 mb-4">
-            <span className="text-xs px-3 py-1 bg-white/20 text-white rounded-full backdrop-blur-sm">
+            <span className="text-[0.78rem] px-3 py-1 bg-white/20 text-white backdrop-blur-sm">
               {categoryLabels[f.category] || f.category}
             </span>
             {f.subcategory && (
-              <span className="text-xs px-3 py-1 bg-white/10 text-white/80 rounded-full">
+              <span className="text-[0.78rem] px-3 py-1 bg-white/10 text-white/80">
                 {f.subcategory}
               </span>
             )}
             {f.cultural_designation && (
-              <span className="text-xs px-3 py-1 bg-miratuku-golden-orange text-white rounded-full">
+              <span className="text-[0.78rem] px-3 py-1 bg-[var(--color-accent)] text-white">
                 文化財
               </span>
             )}
             {hasScore && (
-              <span className="text-xs px-3 py-1.5 bg-white text-[var(--color-accent)] rounded-full font-bold">
+              <span className="text-[0.78rem] px-3 py-1.5 bg-white text-[var(--color-accent)] font-bold">
                 {(f.total_score as unknown as number).toFixed(1)}
               </span>
             )}
           </div>
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white tracking-wide mb-3">
+          <h1 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.15] text-white mb-3">
             {f.name}
           </h1>
           <p className="text-white/70 text-lg">
@@ -127,7 +127,7 @@ export default async function FacilityPage({
           <div className="lg:col-span-2 space-y-10">
             {/* Detailed Description or Overview */}
             <section>
-              <h2 className="font-serif text-2xl text-[var(--color-text)] mb-4">概要</h2>
+              <h2 className="font-serif text-[clamp(1.5rem,4vw,2.5rem)] font-bold leading-[1.15] text-[var(--color-text)] mb-4">概要</h2>
               {isEnriched ? (
                 <p className="text-[var(--color-text-muted)] leading-relaxed text-lg">
                   {f.detailed_description as string}
@@ -141,7 +141,7 @@ export default async function FacilityPage({
 
             {/* Basho Narrative - Story */}
             {isEnriched && f.basho_narrative && (
-              <section className="bg-[var(--color-accent)]/5 border-l-4 border-[var(--color-accent)] rounded-r-lg p-6">
+              <section className="bg-[var(--color-accent)]/5 border-l-4 border-[var(--color-accent)] p-6">
                 <h2 className="font-serif text-xl text-[var(--color-accent)] mb-3">場所の物語</h2>
                 <p className="text-[var(--color-text-muted)] leading-relaxed italic">
                   {f.basho_narrative as string}
@@ -152,20 +152,19 @@ export default async function FacilityPage({
             {/* Signature Dishes / Cuisine */}
             {signatureDishes.length > 0 && (
               <section>
-                <h2 className="font-serif text-2xl text-[var(--color-text)] mb-4">看板メニュー</h2>
+                <h2 className="font-serif text-[clamp(1.5rem,4vw,2.5rem)] font-bold leading-[1.15] text-[var(--color-text)] mb-4">看板メニュー</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {signatureDishes.map((dish, i) => (
                     <div
                       key={i}
-                      className="bg-white border border-[var(--color-border)] rounded-lg p-5 text-center"
+                      className="bg-white border border-[var(--color-border)] p-5 text-center"
                     >
                       <div
-                        className="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center text-lg"
-                        style={{ backgroundColor: `${seedColors[i % 12]}25`, color: seedColors[(i + 4) % 12] }}
+                        className="w-12 h-12 mx-auto mb-3 flex items-center justify-center text-lg bg-[var(--color-bg-alt)] text-[var(--color-accent)]"
                       >
                         {i + 1}
                       </div>
-                      <p className="font-serif text-sm text-[var(--color-text)]">{dish}</p>
+                      <p className="font-serif text-[0.9rem] text-[var(--color-text)]">{dish}</p>
                     </div>
                   ))}
                 </div>
@@ -175,7 +174,7 @@ export default async function FacilityPage({
             {/* History */}
             {isEnriched && f.history_text && (
               <section>
-                <h2 className="font-serif text-2xl text-[var(--color-text)] mb-4">歴史</h2>
+                <h2 className="font-serif text-[clamp(1.5rem,4vw,2.5rem)] font-bold leading-[1.15] text-[var(--color-text)] mb-4">歴史</h2>
                 <p className="text-[var(--color-text-muted)] leading-relaxed">
                   {f.history_text as string}
                 </p>
@@ -185,7 +184,7 @@ export default async function FacilityPage({
             {/* Cultural Context */}
             {isEnriched && f.cultural_context && (
               <section>
-                <h2 className="font-serif text-2xl text-[var(--color-text)] mb-4">文化的文脈</h2>
+                <h2 className="font-serif text-[clamp(1.5rem,4vw,2.5rem)] font-bold leading-[1.15] text-[var(--color-text)] mb-4">文化的文脈</h2>
                 <p className="text-[var(--color-text-muted)] leading-relaxed">
                   {f.cultural_context as string}
                 </p>
@@ -194,7 +193,7 @@ export default async function FacilityPage({
 
             {/* Atmosphere */}
             {isEnriched && f.atmosphere && (
-              <section className="miratuku-gradient-light rounded-lg p-6">
+              <section className="bg-[var(--color-bg-alt)] p-6">
                 <h2 className="font-serif text-xl text-[var(--color-accent)] mb-3">空間の雰囲気</h2>
                 <p className="text-[var(--color-text-muted)] leading-relaxed">
                   {f.atmosphere as string}
@@ -204,16 +203,12 @@ export default async function FacilityPage({
 
             {/* Features */}
             <section>
-              <h2 className="font-serif text-2xl text-[var(--color-text)] mb-4">特徴</h2>
+              <h2 className="font-serif text-[clamp(1.5rem,4vw,2.5rem)] font-bold leading-[1.15] text-[var(--color-text)] mb-4">特徴</h2>
               <div className="flex flex-wrap gap-2">
                 {(f.features as string[]).map((tag, i) => (
                   <span
                     key={i}
-                    className="px-4 py-2 rounded-full text-sm"
-                    style={{
-                      backgroundColor: `${seedColors[i % 12]}20`,
-                      color: seedColors[(i + 6) % 12],
-                    }}
+                    className="px-4 py-2 text-[0.9rem] bg-[var(--color-bg-alt)] text-[var(--color-text-muted)]"
                   >
                     {tag}
                   </span>
@@ -224,8 +219,8 @@ export default async function FacilityPage({
             {/* Basho Score */}
             {hasScore && (
               <section>
-                <h2 className="font-serif text-2xl text-[var(--color-text)] mb-6">場所性スコア</h2>
-                <div className="bg-white border border-[var(--color-border)] rounded-lg p-6">
+                <h2 className="font-serif text-[clamp(1.5rem,4vw,2.5rem)] font-bold leading-[1.15] text-[var(--color-text)] mb-6">場所性スコア</h2>
+                <div className="bg-white border border-[var(--color-border)] p-6">
                   <div className="flex items-baseline gap-2 mb-6">
                     <span className="font-serif text-5xl text-[var(--color-accent)]">
                       {(f.total_score as unknown as number).toFixed(1)}
@@ -241,12 +236,11 @@ export default async function FacilityPage({
                           <span className="text-sm text-[var(--color-text-muted)] w-36 shrink-0">
                             {axis.name}
                           </span>
-                          <div className="flex-1 h-3 bg-miratuku-pale-peach/30 rounded-full overflow-hidden">
+                          <div className="flex-1 h-3 bg-[var(--color-bg-alt)] overflow-hidden">
                             <div
-                              className="h-full rounded-full transition-all"
+                              className="h-full transition-all bg-[var(--color-accent)]"
                               style={{
                                 width: `${(val / 5) * 100}%`,
-                                backgroundColor: axis.color,
                               }}
                             />
                           </div>
@@ -265,7 +259,7 @@ export default async function FacilityPage({
           {/* Sidebar */}
           <aside className="space-y-6">
             {/* Reservation CTA */}
-            <div className="bg-[var(--color-accent)] text-white rounded-lg p-6">
+            <div className="bg-[var(--color-accent)] text-white p-6">
               <h3 className="font-serif text-lg mb-3">予約・訪問</h3>
               {isEnriched && f.reservation_note && (
                 <p className="text-white/70 text-sm mb-4">
@@ -277,7 +271,7 @@ export default async function FacilityPage({
                   href={f.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full text-center py-3 bg-white text-[var(--color-accent)] text-sm font-medium rounded-lg hover:bg-white/90 transition-colors mb-2"
+                  className="block w-full text-center py-3 bg-white text-[var(--color-accent)] text-[0.9rem] font-medium hover:bg-white/90 transition-colors mb-2"
                 >
                   公式サイトで予約
                 </a>
@@ -287,7 +281,7 @@ export default async function FacilityPage({
                   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(f.address || f.name)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full text-center py-3 border border-white/30 text-white text-sm rounded-lg hover:bg-white/10 transition-colors"
+                  className="block w-full text-center py-3 border border-white/30 text-white text-[0.9rem] hover:bg-white/10 transition-colors"
                 >
                   Google Mapで開く
                 </a>
@@ -295,7 +289,7 @@ export default async function FacilityPage({
             </div>
 
             {/* Info Card */}
-            <div className="bg-white border border-[var(--color-border)] rounded-lg p-6 space-y-4">
+            <div className="bg-white border border-[var(--color-border)] p-6 space-y-4">
               <h3 className="font-serif text-lg text-[var(--color-text)]">基本情報</h3>
               <dl className="space-y-3 text-sm">
                 {f.address && (
@@ -342,14 +336,14 @@ export default async function FacilityPage({
                 {f.cultural_designation && (
                   <div>
                     <dt className="text-[var(--color-text-muted)]/60 text-xs">文化財指定</dt>
-                    <dd className="text-miratuku-terracotta font-medium">{f.cultural_designation}</dd>
+                    <dd className="text-[var(--color-accent)] font-medium">{f.cultural_designation}</dd>
                   </div>
                 )}
               </dl>
             </div>
 
             {/* Category badge */}
-            <div className="bg-white border border-[var(--color-border)] rounded-lg p-6">
+            <div className="bg-white border border-[var(--color-border)] p-6">
               <h3 className="font-serif text-lg text-[var(--color-text)] mb-2">カテゴリ</h3>
               <p className="text-sm text-[var(--color-text-muted)]">
                 {categoryLabels[f.category] || f.category}
@@ -362,12 +356,12 @@ export default async function FacilityPage({
         {/* Related */}
         {relatedFallback.length > 0 && (
           <section className="mt-16 pt-12 border-t border-[var(--color-border)]">
-            <h2 className="font-serif text-2xl text-[var(--color-text)] mb-8">同じカテゴリの施設</h2>
+            <h2 className="font-serif text-[clamp(1.5rem,4vw,2.5rem)] font-bold leading-[1.15] text-[var(--color-text)] mb-8">同じカテゴリの施設</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {relatedFallback.map((r, ri) => (
                 <Link key={r.id} href={`/facilities/${r.id}`} className="group block">
                   <div
-                    className="aspect-[4/3] mb-3 overflow-hidden relative rounded-lg"
+                    className="aspect-[4/3] mb-3 overflow-hidden relative"
                     style={{
                       background: `linear-gradient(135deg, ${seedColors[(ri * 3) % 12]}40, ${seedColors[(ri * 3 + 4) % 12]}40)`,
                     }}
@@ -389,16 +383,16 @@ export default async function FacilityPage({
                     </div>
                     {r.total_score != null && (
                       <div className="absolute top-3 right-3">
-                        <span className="text-xs px-2 py-0.5 bg-white/90 text-[var(--color-accent)] rounded font-medium">
+                        <span className="text-[0.78rem] px-2 py-0.5 bg-white/90 text-[var(--color-accent)] font-medium">
                           {(r.total_score as unknown as number).toFixed(1)}
                         </span>
                       </div>
                     )}
                   </div>
-                  <h3 className="font-serif text-lg text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">
+                  <h3 className="font-serif text-[1.15rem] font-medium leading-snug text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">
                     {r.name}
                   </h3>
-                  <p className="text-xs text-[var(--color-text-muted)] mt-1">
+                  <p className="text-[0.78rem] text-[var(--color-text-muted)] mt-1">
                     {r.prefecture} {r.city}
                     {r.founded_year ? ` / ${r.founded_year}年` : ""}
                   </p>

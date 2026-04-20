@@ -35,33 +35,42 @@ export default function FacilitiesPage() {
   const prefectures = Array.from(new Set(dining.map((f) => f.prefecture).filter(Boolean)));
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* Header */}
-      <div className="mb-10">
-        <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">Kanto Dining</p>
-        <h1 className="font-serif text-3xl md:text-4xl text-[var(--color-text)] mb-4">関東の食</h1>
-        <p className="text-[var(--color-text-muted)]">{sorted.length}件の飲食店</p>
-      </div>
+    <div>
+      {/* Hero */}
+      <section
+        className="relative overflow-hidden"
+        style={{
+          background: "linear-gradient(170deg, #1a5c6e 0%, #144a59 40%, #0d3a47 100%)",
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+          <p className="text-[0.7rem] tracking-[0.3em] text-white/50 mb-3 uppercase font-medium">Kanto Dining</p>
+          <h1 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.15] text-white mb-4">関東の食</h1>
+          <p className="text-white/60 text-[0.9rem]">{sorted.length}件の飲食店</p>
+        </div>
+      </section>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
       {/* Filter Tags */}
       <div className="mb-8 space-y-3">
         <div className="flex flex-wrap gap-2">
-          <span className="text-xs text-stone-400 py-1">カテゴリ:</span>
+          <span className="text-[0.78rem] text-[var(--color-text-light)] py-1">カテゴリ:</span>
           {categories.map((cat) => (
             <span
               key={cat}
-              className="text-xs px-3 py-1 border border-stone-300 text-stone-600 rounded-full hover:bg-stone-900 hover:text-white hover:border-stone-900 transition-colors cursor-pointer"
+              className="text-[0.78rem] px-3 py-1 border border-[var(--color-border)] text-[var(--color-text-muted)] hover:bg-[var(--color-accent)] hover:text-white hover:border-[var(--color-accent)] transition-colors cursor-pointer"
             >
               {categoryLabels[cat] || cat}
             </span>
           ))}
         </div>
         <div className="flex flex-wrap gap-2">
-          <span className="text-xs text-stone-400 py-1">地域:</span>
+          <span className="text-[0.78rem] text-[var(--color-text-light)] py-1">地域:</span>
           {prefectures.sort().map((pref) => (
             <span
               key={pref}
-              className="text-xs px-3 py-1 border border-stone-300 text-stone-600 rounded-full hover:bg-stone-900 hover:text-white hover:border-stone-900 transition-colors cursor-pointer"
+              className="text-[0.78rem] px-3 py-1 border border-[var(--color-border)] text-[var(--color-text-muted)] hover:bg-[var(--color-accent)] hover:text-white hover:border-[var(--color-accent)] transition-colors cursor-pointer"
             >
               {pref}
             </span>
@@ -74,13 +83,13 @@ export default function FacilitiesPage() {
         {sorted.map((f) => (
           <Link key={f.id} href={`/facilities/${f.id}`} className="group block">
             {/* Image */}
-            <div className="aspect-[4/3] bg-miratuku-pale-peach/20 mb-4 overflow-hidden relative rounded-lg">
+            <div className="aspect-[4/3] bg-[var(--color-bg-alt)] mb-4 overflow-hidden relative">
               {f.image_url && (
                 <Image
                   src={f.image_url}
                   alt={f.name}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   unoptimized
                 />
@@ -88,14 +97,14 @@ export default function FacilitiesPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-accent)]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               {/* Category badge */}
               <div className="absolute top-3 left-3">
-                <span className="text-xs px-2 py-1 bg-[var(--color-accent)]/80 text-white rounded">
+                <span className="text-[0.78rem] px-2 py-1 bg-[var(--color-accent)]/80 text-white">
                   {categoryLabels[f.category] || f.category}
                 </span>
               </div>
               {/* Score badge */}
               {f.total_score != null && (
                 <div className="absolute top-3 right-3">
-                  <span className="text-xs px-2 py-0.5 bg-white/90 text-[var(--color-accent)] rounded font-medium">
+                  <span className="text-[0.78rem] px-2 py-0.5 bg-white/90 text-[var(--color-accent)] font-medium">
                     {(f.total_score as unknown as number).toFixed(1)}
                   </span>
                 </div>
@@ -104,28 +113,29 @@ export default function FacilitiesPage() {
 
             {/* Content */}
             <div className="flex items-start justify-between gap-2 mb-1">
-              <h3 className="font-serif text-lg text-stone-900 group-hover:text-stone-600 transition-colors">
+              <h3 className="font-serif text-[1.15rem] font-medium leading-snug text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">
                 {f.name}
               </h3>
               {f.founded_year && (
-                <span className="text-xs text-stone-400 whitespace-nowrap mt-1">
+                <span className="text-[0.78rem] text-[var(--color-text-light)] whitespace-nowrap mt-1">
                   {f.founded_year}年
                 </span>
               )}
             </div>
-            <p className="text-xs text-stone-400 mb-2">
+            <p className="text-[0.78rem] text-[var(--color-text-light)] mb-2">
               {f.prefecture} {f.city}
             </p>
-            <p className="text-sm text-stone-500 leading-relaxed line-clamp-2">{f.overview}</p>
+            <p className="text-[0.9rem] text-[var(--color-text-muted)] leading-relaxed line-clamp-2">{f.overview}</p>
             <div className="flex flex-wrap gap-1.5 mt-3">
               {(f.features as string[]).slice(0, 4).map((tag, i) => (
-                <span key={i} className="text-xs px-2 py-0.5 bg-stone-100 text-stone-500 rounded">
+                <span key={i} className="text-[0.78rem] px-2 py-0.5 bg-[var(--color-bg-alt)] text-[var(--color-text-muted)]">
                   {tag}
                 </span>
               ))}
             </div>
           </Link>
         ))}
+      </div>
       </div>
     </div>
   );

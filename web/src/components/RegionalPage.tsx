@@ -61,14 +61,14 @@ export default function RegionalPage({
       <section
         className="relative overflow-hidden"
         style={{
-          background: `linear-gradient(135deg, ${gradientFrom} 0%, ${gradientTo} 100%)`,
+          background: "linear-gradient(170deg, #1a5c6e 0%, #144a59 40%, #0d3a47 100%)",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-          <p className="text-xs tracking-[0.4em] text-white/50 mb-3 uppercase">
+          <p className="text-[0.7rem] tracking-[0.3em] text-white/50 mb-3 uppercase font-medium">
             {regionNameEn}
           </p>
-          <h1 className="font-serif text-4xl md:text-5xl tracking-wide text-white mb-4">
+          <h1 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.15] text-white mb-4">
             {regionName}の食
           </h1>
           <p className="text-white/60 text-lg max-w-2xl leading-relaxed">
@@ -76,16 +76,16 @@ export default function RegionalPage({
           </p>
           <div className="flex gap-6 mt-8 text-center">
             <div>
-              <p className="text-3xl font-serif text-white">{dining.length}</p>
-              <p className="text-xs text-white/40 mt-1">飲食店</p>
+              <p className="text-5xl font-black font-serif text-white">{dining.length}</p>
+              <p className="text-[0.78rem] text-white/40 mt-1">飲食店</p>
             </div>
             {Object.entries(byPref)
               .sort(([, a], [, b]) => b.length - a.length)
               .slice(0, 5)
               .map(([pref, list]) => (
                 <div key={pref}>
-                  <p className="text-3xl font-serif text-white">{list.length}</p>
-                  <p className="text-xs text-white/40 mt-1">{pref}</p>
+                  <p className="text-5xl font-black font-serif text-white">{list.length}</p>
+                  <p className="text-[0.78rem] text-white/40 mt-1">{pref}</p>
                 </div>
               ))}
           </div>
@@ -108,16 +108,16 @@ export default function RegionalPage({
           {recommended.length > 0 && (
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
               <div className="mb-8">
-                <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">{regionNameEn} Pick</p>
-                <h2 className="font-serif text-2xl text-[var(--color-text)]">{regionName}のおすすめ</h2>
+                <p className="text-[0.7rem] tracking-[0.3em] text-[var(--color-accent)] mb-2 uppercase font-medium">{regionNameEn} Pick</p>
+                <h2 className="font-serif text-[clamp(1.5rem,4vw,2.5rem)] font-bold leading-[1.15] text-[var(--color-text)]">{regionName}のおすすめ</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                 {recommended.map((f: any, idx: number) => (
-                  <Link key={f.id} href={`/facilities/${f.id}`} className="group block bg-white border border-[var(--color-border)] rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+                  <Link key={f.id} href={`/facilities/${f.id}`} className="group block bg-white border border-[var(--color-border)] overflow-hidden transition-colors">
                     <div className="aspect-[16/9] relative overflow-hidden">
                       {f.image_url && (
-                        <Image src={f.image_url} alt={f.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="33vw" unoptimized />
+                        <Image src={f.image_url} alt={f.name} fill className="object-cover group-hover:scale-[1.04] transition-transform duration-500" sizes="33vw" unoptimized />
                       )}
                       {!f.image_url && (
                         <div className="absolute inset-0 flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${seedColors[idx % 12]}40, ${seedColors[(idx+5) % 12]}40)` }}>
@@ -126,9 +126,9 @@ export default function RegionalPage({
                       )}
                     </div>
                     <div className="p-4">
-                      <h3 className="font-serif text-lg text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors mb-1">{f.name}</h3>
-                      <p className="text-xs text-[var(--color-text-muted)] mb-2">{f.prefecture} {f.city}</p>
-                      <p className="text-sm text-[var(--color-text-muted)] leading-relaxed line-clamp-2">{f.overview}</p>
+                      <h3 className="font-serif text-[1.15rem] font-medium leading-snug text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors mb-1">{f.name}</h3>
+                      <p className="text-[0.78rem] text-[var(--color-text-muted)] mb-2">{f.prefecture} {f.city}</p>
+                      <p className="text-[0.9rem] text-[var(--color-text-muted)] leading-relaxed line-clamp-2">{f.overview}</p>
                     </div>
                   </Link>
                 ))}
@@ -143,10 +143,10 @@ export default function RegionalPage({
                 className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12"
               >
                 <div className="mb-8">
-                  <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">
+                  <p className="text-[0.7rem] tracking-[0.3em] text-[var(--color-accent)] mb-2 uppercase font-medium">
                     {pref}
                   </p>
-                  <h2 className="font-serif text-2xl text-[var(--color-text)]">
+                  <h2 className="font-serif text-[clamp(1.5rem,4vw,2.5rem)] font-bold leading-[1.15] text-[var(--color-text)]">
                     {pref}の食
                   </h2>
                 </div>
@@ -158,13 +158,13 @@ export default function RegionalPage({
                       href={`/facilities/${f.id}`}
                       className="group block"
                     >
-                      <div className="aspect-[4/3] bg-miratuku-pale-peach/20 mb-4 overflow-hidden relative rounded-lg">
+                      <div className="aspect-[4/3] bg-[var(--color-bg-alt)] mb-4 overflow-hidden relative">
                         {f.image_url && (
                           <Image
                             src={f.image_url}
                             alt={f.name}
                             fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                            className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             unoptimized
                           />
@@ -188,32 +188,32 @@ export default function RegionalPage({
                         )}
                         <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-accent)]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                         <div className="absolute top-3 left-3">
-                          <span className="text-xs px-2 py-1 bg-[var(--color-accent)]/80 text-white rounded">
+                          <span className="text-[0.78rem] px-2 py-1 bg-[var(--color-accent)]/80 text-white">
                             {categoryLabels[f.category] || f.category}
                           </span>
                         </div>
                         {f.total_score != null && (
                           <div className="absolute top-3 right-3">
-                            <span className="text-xs px-2 py-0.5 bg-white/90 text-[var(--color-accent)] rounded font-medium">
+                            <span className="text-[0.78rem] px-2 py-0.5 bg-white/90 text-[var(--color-accent)] font-medium">
                               {(f.total_score as number).toFixed(1)}
                             </span>
                           </div>
                         )}
                       </div>
                       <div className="flex items-start justify-between gap-2 mb-1">
-                        <h3 className="font-serif text-lg text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">
+                        <h3 className="font-serif text-[1.15rem] font-medium leading-snug text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">
                           {f.name}
                         </h3>
                         {f.founded_year && (
-                          <span className="text-xs text-[var(--color-text-muted)] whitespace-nowrap mt-1">
+                          <span className="text-[0.78rem] text-[var(--color-text-muted)] whitespace-nowrap mt-1">
                             {f.founded_year}年
                           </span>
                         )}
                       </div>
-                      <p className="text-xs text-[var(--color-text-muted)] mb-2">
+                      <p className="text-[0.78rem] text-[var(--color-text-muted)] mb-2">
                         {f.prefecture} {f.city}
                       </p>
-                      <p className="text-sm text-[var(--color-text-muted)] leading-relaxed line-clamp-2">
+                      <p className="text-[0.9rem] text-[var(--color-text-muted)] leading-relaxed line-clamp-2">
                         {f.overview}
                       </p>
                     </Link>

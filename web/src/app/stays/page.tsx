@@ -36,10 +36,10 @@ export default function StaysPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="miratuku-gradient text-white py-16 md:py-20">
+      <section className="relative overflow-hidden text-white py-16 md:py-20" style={{ background: "linear-gradient(170deg, #1a5c6e 0%, #144a59 40%, #0d3a47 100%)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-xs tracking-[0.4em] text-white/50 mb-3 uppercase">Stays</p>
-          <h1 className="font-serif text-4xl md:text-5xl tracking-wide mb-4">
+          <p className="text-[0.7rem] tracking-[0.3em] text-white/50 mb-3 uppercase font-medium">Stays</p>
+          <h1 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.15] mb-4">
             場所性で選ぶ、日本の宿
           </h1>
           <p className="text-white/60 text-lg max-w-2xl leading-relaxed">
@@ -48,16 +48,16 @@ export default function StaysPage() {
           </p>
           <div className="flex gap-6 mt-8 text-center">
             <div>
-              <p className="text-3xl font-serif">{stays.length}</p>
-              <p className="text-xs text-white/40 mt-1">宿泊施設</p>
+              <p className="text-5xl font-black font-serif">{stays.length}</p>
+              <p className="text-[0.78rem] text-white/40 mt-1">宿泊施設</p>
             </div>
             <div>
-              <p className="text-3xl font-serif">{ryokans.length}</p>
-              <p className="text-xs text-white/40 mt-1">旅館</p>
+              <p className="text-5xl font-black font-serif">{ryokans.length}</p>
+              <p className="text-[0.78rem] text-white/40 mt-1">旅館</p>
             </div>
             <div>
-              <p className="text-3xl font-serif">{hotels.length}</p>
-              <p className="text-xs text-white/40 mt-1">ホテル</p>
+              <p className="text-5xl font-black font-serif">{hotels.length}</p>
+              <p className="text-[0.78rem] text-white/40 mt-1">ホテル</p>
             </div>
           </div>
         </div>
@@ -67,8 +67,8 @@ export default function StaysPage() {
       {ryokans.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="mb-10">
-            <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">Ryokan</p>
-            <h2 className="font-serif text-3xl text-[var(--color-text)]">旅館</h2>
+            <p className="text-[0.7rem] tracking-[0.3em] text-[var(--color-accent)] mb-2 uppercase font-medium">Ryokan</p>
+            <h2 className="font-serif text-[clamp(1.5rem,4vw,2.5rem)] font-bold leading-[1.15] text-[var(--color-text)]">旅館</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {ryokans.map((f, idx) => (
@@ -83,8 +83,8 @@ export default function StaysPage() {
         <section className="bg-white border-t border-[var(--color-border)]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div className="mb-10">
-              <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">Hotels</p>
-              <h2 className="font-serif text-3xl text-[var(--color-text)]">ホテル</h2>
+              <p className="text-[0.7rem] tracking-[0.3em] text-[var(--color-accent)] mb-2 uppercase font-medium">Hotels</p>
+              <h2 className="font-serif text-[clamp(1.5rem,4vw,2.5rem)] font-bold leading-[1.15] text-[var(--color-text)]">ホテル</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {hotels.map((f, idx) => (
@@ -99,8 +99,8 @@ export default function StaysPage() {
       {others.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="mb-10">
-            <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">Others</p>
-            <h2 className="font-serif text-3xl text-[var(--color-text)]">民宿・その他</h2>
+            <p className="text-[0.7rem] tracking-[0.3em] text-[var(--color-accent)] mb-2 uppercase font-medium">Others</p>
+            <h2 className="font-serif text-[clamp(1.5rem,4vw,2.5rem)] font-bold leading-[1.15] text-[var(--color-text)]">民宿・その他</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {others.map((f, idx) => (
@@ -117,13 +117,13 @@ export default function StaysPage() {
 function FacilityCard({ facility: f, idx }: { facility: any; idx: number }) {
   return (
     <Link href={`/facilities/${f.id}`} className="group block">
-      <div className="aspect-[4/3] bg-miratuku-pale-peach/20 mb-4 overflow-hidden relative rounded-lg">
+      <div className="aspect-[4/3] bg-[var(--color-bg-alt)] mb-4 overflow-hidden relative">
         {f.image_url && (
           <Image
             src={f.image_url}
             alt={f.name}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
+            className="object-cover group-hover:scale-[1.04] transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             unoptimized
           />
@@ -140,24 +140,24 @@ function FacilityCard({ facility: f, idx }: { facility: any; idx: number }) {
         <div className="absolute bottom-0 left-0 right-0 p-4">
           <div className="flex items-center gap-2">
             {f.total_score != null && (
-              <span className="text-xs px-2 py-0.5 bg-white/90 text-[var(--color-accent)] rounded font-medium">
+              <span className="text-[0.78rem] px-2 py-0.5 bg-white/90 text-[var(--color-accent)] font-medium">
                 {(f.total_score as number).toFixed(1)}
               </span>
             )}
-            <span className="text-xs px-2 py-0.5 bg-[var(--color-accent)]/60 text-white rounded">
+            <span className="text-[0.78rem] px-2 py-0.5 bg-[var(--color-accent)]/60 text-white">
               {subcategoryLabels[f.subcategory] || f.subcategory}
             </span>
           </div>
         </div>
       </div>
-      <h3 className="font-serif text-lg text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors mb-1">
+      <h3 className="font-serif text-[1.15rem] font-medium leading-snug text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors mb-1">
         {f.name}
       </h3>
-      <p className="text-xs text-[var(--color-text-muted)] mb-2">
+      <p className="text-[0.78rem] text-[var(--color-text-muted)] mb-2">
         {f.prefecture} {f.city}
         {f.founded_year ? ` / ${f.founded_year}年創業` : ""}
       </p>
-      <p className="text-sm text-[var(--color-text-muted)] leading-relaxed line-clamp-2">
+      <p className="text-[0.9rem] text-[var(--color-text-muted)] leading-relaxed line-clamp-2">
         {f.overview}
       </p>
     </Link>

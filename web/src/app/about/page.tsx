@@ -1,21 +1,21 @@
 export default function AboutPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-      <p className="text-xs tracking-[0.3em] text-stone-400 mb-2 uppercase">About</p>
-      <h1 className="font-serif text-4xl md:text-5xl text-stone-900 mb-8 leading-tight">
+      <p className="text-[0.7rem] tracking-[0.3em] text-[var(--color-text-light)] mb-2 uppercase font-medium">About</p>
+      <h1 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.15] text-[var(--color-text)] mb-8">
         場所性とは何か
       </h1>
 
-      <div className="prose prose-stone prose-lg max-w-none">
-        <p className="text-xl text-stone-600 leading-relaxed mb-8">
+      <div className="prose prose-lg max-w-none" style={{ '--tw-prose-body': 'var(--color-text-muted)', '--tw-prose-headings': 'var(--color-text)' } as React.CSSProperties}>
+        <p className="text-xl text-[var(--color-text-muted)] leading-relaxed mb-8">
           「場所性（basho-sei）」とは、ある場所が持つ歴史的・文化的な固有の意味の深さを指す概念です。
           単なる物理的空間としての立地ではなく、そこで営まれてきた文化的実践、
           積み重ねられた時間、地域との結びつきが生み出す、場所そのものの力を意味します。
         </p>
 
-        <h2 className="font-serif text-2xl text-stone-900 mt-12 mb-4">理論的基盤</h2>
+        <h2 className="font-serif text-[clamp(1.5rem,4vw,2.5rem)] font-bold leading-[1.15] text-[var(--color-text)] mt-12 mb-4">理論的基盤</h2>
 
-        <h3 className="font-serif text-xl text-stone-800 mt-8 mb-3">西田幾多郎の「場所」</h3>
+        <h3 className="font-serif text-xl text-[var(--color-text)] mt-8 mb-3">西田幾多郎の「場所」</h3>
         <p>
           日本の哲学者・西田幾多郎（1870-1945）は、西洋哲学の主語的論理に対して
           「述語的論理」を提唱しました。西田の「場所」は物理的空間ではなく、
@@ -24,7 +24,7 @@ export default function AboutPage() {
           その人のための場として機能することにあります。
         </p>
 
-        <h3 className="font-serif text-xl text-stone-800 mt-8 mb-3">ブルデューの文化資本</h3>
+        <h3 className="font-serif text-xl text-[var(--color-text)] mt-8 mb-3">ブルデューの文化資本</h3>
         <p>
           フランスの社会学者ピエール・ブルデューは、文化的資源が社会的に機能する仕組みを明らかにしました。
           飲食店や宿泊施設においては、職人の技術（身体化された文化資本）、
@@ -32,7 +32,7 @@ export default function AboutPage() {
           場所性が具現化されます。
         </p>
 
-        <h3 className="font-serif text-xl text-stone-800 mt-8 mb-3">現象学的場所論</h3>
+        <h3 className="font-serif text-xl text-[var(--color-text)] mt-8 mb-3">現象学的場所論</h3>
         <p>
           エドワード・レルフは「場所のアイデンティティ」を物理的設定・活動・意味の三要素で捉え、
           没場所性（placelessness）— 均質化されたチェーン店的空間 — を批判しました。
@@ -40,7 +40,7 @@ export default function AboutPage() {
           空間が経験を通じて意味ある場所へと変容する過程を描きました。
         </p>
 
-        <h2 className="font-serif text-2xl text-stone-900 mt-12 mb-6">8軸の評価フレームワーク</h2>
+        <h2 className="font-serif text-[clamp(1.5rem,4vw,2.5rem)] font-bold leading-[1.15] text-[var(--color-text)] mt-12 mb-6">8軸の評価フレームワーク</h2>
 
         <div className="not-prose space-y-4">
           {[
@@ -53,17 +53,17 @@ export default function AboutPage() {
             { num: 7, name: "ナラティブ性", desc: "場所にまつわる逸話・伝説、著名人との関わり、場所自体が語りかける物語性。場所の感覚(sense of place)。" },
             { num: 8, name: "本物性", desc: "文化的表現が商業的演出ではなく内在的な必然性に基づいている度合い。レルフのauthentic place。" },
           ].map((axis) => (
-            <div key={axis.num} className="flex gap-4 p-4 bg-stone-50 border border-stone-200 rounded-lg">
-              <span className="font-serif text-2xl text-stone-400 shrink-0 w-8">{axis.num}</span>
+            <div key={axis.num} className="flex gap-4 p-4 bg-[var(--color-bg-alt)] border border-[var(--color-border)]">
+              <span className="font-serif text-2xl text-[var(--color-accent)] shrink-0 w-8">{axis.num}</span>
               <div>
-                <h4 className="font-serif text-lg text-stone-900 mb-1">{axis.name}</h4>
-                <p className="text-sm text-stone-600 leading-relaxed">{axis.desc}</p>
+                <h4 className="font-serif text-[1.15rem] font-medium leading-snug text-[var(--color-text)] mb-1">{axis.name}</h4>
+                <p className="text-[0.9rem] text-[var(--color-text-muted)] leading-relaxed">{axis.desc}</p>
               </div>
             </div>
           ))}
         </div>
 
-        <h2 className="font-serif text-2xl text-stone-900 mt-12 mb-4">このサイトについて</h2>
+        <h2 className="font-serif text-[clamp(1.5rem,4vw,2.5rem)] font-bold leading-[1.15] text-[var(--color-text)] mt-12 mb-4">このサイトについて</h2>
         <p>
           Bashoは、トレンドや口コミ評価ではなく、歴史と文化に根ざした「場所性」という
           新しい軸で日本の飲食店・宿泊施設を発見するためのマッチングサイトです。
@@ -71,15 +71,15 @@ export default function AboutPage() {
           あなたが求める場所性を持つ施設との出会いを実現します。
         </p>
 
-        <div className="not-prose mt-12 p-6 bg-miratuku-pale-peach/20 rounded-lg border border-[var(--color-border)]">
+        <div className="not-prose mt-12 p-6 bg-[var(--color-bg-alt)] border border-[var(--color-border)]">
           <h3 className="font-serif text-xl text-[var(--color-accent)] mb-3">場所性レポート</h3>
-          <p className="text-sm text-[var(--color-text-muted)] mb-4">
+          <p className="text-[0.9rem] text-[var(--color-text-muted)] mb-4">
             場所性の理論的基盤について、西田幾多郎、ブルデュー、トゥアン、レルフなどの
             学術的知見を統合した10,000字の詳細レポートをお読みいただけます。
           </p>
           <a
             href="/report-bashosei.html"
-            className="inline-block bg-[var(--color-accent)] text-white px-6 py-2.5 text-sm rounded hover:bg-[var(--color-accent-light)] transition-colors"
+            className="inline-block bg-[var(--color-accent)] text-white px-6 py-2.5 text-[0.9rem] hover:opacity-90 transition-opacity"
           >
             レポートを読む
           </a>
