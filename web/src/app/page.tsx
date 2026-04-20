@@ -69,28 +69,28 @@ for (const f of dining) {
   }
 }
 
-// Themes
+// Themes with playful icons
 const themes = [
-  { name: "老舗 (100年以上)", icon: "1", desc: "創業100年を超える歴史を持つ名店", filter: "centenarian" },
-  { name: "発祥の店", icon: "2", desc: "「元祖」「発祥」の称号を持つ店", filter: "origin" },
-  { name: "文化財の建物", icon: "3", desc: "登録有形文化財・重要文化財の建物", filter: "heritage" },
-  { name: "文豪・偉人ゆかりの店", icon: "4", desc: "文学者や著名人が愛した場所", filter: "literary" },
-  { name: "フレンチ & イタリアン", icon: "5", desc: "ヨーロッパの食文化を伝える名店", filter: "european" },
-  { name: "純喫茶 & カフェ", icon: "6", desc: "珈琲文化と場所性が交差する空間", filter: "kissaten" },
-  { name: "パン & 洋菓子", icon: "7", desc: "ベーカリー・パティスリーの名店", filter: "bakery" },
-  { name: "バー & 酒文化", icon: "8", desc: "カクテル、ワイン、日本酒の場所性", filter: "bar" },
+  { name: "老舗 (100年以上)", emoji: "🏯", desc: "創業100年を超える歴史を持つ名店", filter: "centenarian" },
+  { name: "発祥の店", emoji: "⭐", desc: "「元祖」「発祥」の称号を持つ店", filter: "origin" },
+  { name: "文化財の建物", emoji: "🏛", desc: "登録有形文化財・重要文化財の建物", filter: "heritage" },
+  { name: "文豪ゆかりの店", emoji: "📖", desc: "文学者や著名人が愛した場所", filter: "literary" },
+  { name: "フレンチ & イタリアン", emoji: "🍷", desc: "ヨーロッパの食文化を伝える名店", filter: "european" },
+  { name: "純喫茶 & カフェ", emoji: "☕", desc: "珈琲文化と場所性が交差する空間", filter: "kissaten" },
+  { name: "パン & 洋菓子", emoji: "🥐", desc: "ベーカリー・パティスリーの名店", filter: "bakery" },
+  { name: "バー & 酒文化", emoji: "🥃", desc: "カクテル、ワイン、日本酒の場所性", filter: "bar" },
 ];
 
 // Eras
 const currentYear = new Date().getFullYear();
 const eras = [
-  { name: "〜江戸", range: "1603年以前", min: 0, max: 1603 },
-  { name: "江戸", range: "1603-1867", min: 1603, max: 1868 },
-  { name: "明治", range: "1868-1912", min: 1868, max: 1912 },
-  { name: "大正", range: "1912-1926", min: 1912, max: 1926 },
-  { name: "昭和前期", range: "1926-1945", min: 1926, max: 1945 },
-  { name: "昭和後期", range: "1945-1989", min: 1945, max: 1989 },
-  { name: "平成以降", range: "1989-", min: 1989, max: currentYear + 1 },
+  { name: "〜江戸", range: "1603年以前", min: 0, max: 1603, color: "#966D5E" },
+  { name: "江戸", range: "1603-1867", min: 1603, max: 1868, color: "#B07256" },
+  { name: "明治", range: "1868-1912", min: 1868, max: 1912, color: "#DC8766" },
+  { name: "大正", range: "1912-1926", min: 1912, max: 1926, color: "#F0A671" },
+  { name: "昭和前期", range: "1926-1945", min: 1926, max: 1945, color: "#CEA26F" },
+  { name: "昭和後期", range: "1945-1989", min: 1945, max: 1989, color: "#7a9e8e" },
+  { name: "平成以降", range: "1989-", min: 1989, max: currentYear + 1, color: "#a8c5b6" },
 ];
 
 // Count per era
@@ -103,27 +103,29 @@ for (const era of eras) {
 export default function Home() {
   return (
     <div>
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 miratuku-gradient opacity-95" />
+      {/* Hero — lighter, warmer, with floating seeds */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#F7BEA2] via-[#F0A671] to-[#DC8766]">
         <div className="absolute inset-0 overflow-hidden">
           {seedColors.map((color, i) => (
             <div
               key={i}
-              className="absolute rounded-full opacity-20"
+              className="absolute rounded-full seed-float"
               style={{
                 backgroundColor: color,
-                width: `${40 + i * 15}px`,
-                height: `${60 + i * 20}px`,
-                top: `${10 + (i * 37) % 80}%`,
+                width: `${30 + i * 12}px`,
+                height: `${45 + i * 16}px`,
+                top: `${8 + (i * 37) % 80}%`,
                 left: `${5 + (i * 43) % 90}%`,
-                transform: `rotate(${i * 30 - 60}deg)`,
+                opacity: 0.15,
+                ["--seed-rotate" as string]: `${i * 30 - 60}deg`,
+                ["--seed-duration" as string]: `${3 + i * 0.5}s`,
+                ["--seed-delay" as string]: `${i * 0.3}s`,
               }}
             />
           ))}
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-          <p className="text-sm tracking-[0.4em] text-white/60 mb-4">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36">
+          <p className="text-sm tracking-[0.4em] text-white/50 mb-5">
             BASHO — PLACENESS
           </p>
           <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-tight tracking-wide text-white mb-6">
@@ -131,68 +133,87 @@ export default function Home() {
             <br />
             まだ見ぬ食に出会う
           </h1>
-          <p className="text-white/70 text-lg md:text-xl max-w-2xl leading-relaxed mb-10">
+          <p className="text-white/75 text-lg md:text-xl max-w-2xl leading-relaxed mb-12">
             トレンドでも口コミでもない。歴史と文化が堆積した「場所性」という
             新しい軸で、あなたにふさわしいレストラン・カフェ・バーを見つける。
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link href="/facilities" className="inline-block bg-white text-[var(--color-accent)] px-8 py-3.5 text-sm font-medium tracking-wider hover:bg-white/90 transition-colors rounded">
+            <Link href="/facilities" className="inline-block bg-white text-[var(--color-accent)] px-8 py-4 text-sm font-medium tracking-wider hover:bg-white/90 hover:shadow-lg transition-all rounded-xl">
               食を探す
             </Link>
-            <Link href="/stays" className="inline-block border border-white/40 text-white px-8 py-3.5 text-sm tracking-wider hover:border-white/70 hover:bg-white/10 transition-colors rounded">
+            <Link href="/stays" className="inline-block border-2 border-white/50 text-white px-8 py-4 text-sm tracking-wider hover:border-white hover:bg-white/10 transition-all rounded-xl">
               宿を探す
             </Link>
           </div>
         </div>
+        {/* Wave divider */}
+        <div className="hero-wave">
+          <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="var(--color-bg)" />
+          </svg>
+        </div>
       </section>
 
-      {/* Stats */}
-      <section className="bg-white border-b border-[var(--color-border)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            {[
-              { val: diningStats.total, label: "飲食店" },
-              { val: diningStats.prefectures, label: "都道府県" },
-              { val: "8", label: "評価軸" },
-              { val: stats.oldest_year || "—", label: "最古の創業年" },
-            ].map((s, i) => (
-              <div key={i}>
-                <p className="text-2xl font-serif text-[var(--color-accent)]">{s.val}</p>
-                <p className="text-xs text-[var(--color-text-muted)] mt-1 tracking-wider">{s.label}</p>
-              </div>
-            ))}
+      {/* Stats — floating card style */}
+      <section className="relative -mt-4 z-10">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-2xl shadow-lg border border-[var(--color-border)]/50 p-6 md:p-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              {[
+                { val: diningStats.total, label: "飲食店", suffix: "件" },
+                { val: diningStats.prefectures, label: "都道府県", suffix: "" },
+                { val: "8", label: "評価軸", suffix: "軸" },
+                { val: stats.oldest_year || "—", label: "最古の創業年", suffix: "年" },
+              ].map((s, i) => (
+                <div key={i} className="group">
+                  <p className="text-3xl md:text-4xl font-serif text-[var(--color-accent)] group-hover:text-miratuku-terracotta transition-colors">
+                    {s.val}
+                    {s.suffix && <span className="text-sm text-[var(--color-text-muted)] ml-0.5">{s.suffix}</span>}
+                  </p>
+                  <p className="text-xs text-[var(--color-text-muted)] mt-2 tracking-wider">{s.label}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Random Recommendations */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="mb-8">
-          <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">Today&apos;s Pick</p>
-          <h2 className="font-serif text-2xl md:text-3xl text-[var(--color-text)]">今日のおすすめ</h2>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div className="mb-10 flex items-end justify-between">
+          <div>
+            <p className="text-xs tracking-[0.3em] text-[var(--color-sage)] mb-2 uppercase font-medium">Today&apos;s Pick</p>
+            <h2 className="font-serif text-2xl md:text-3xl text-[var(--color-text)]">今日のおすすめ</h2>
+          </div>
+          <Link href="/facilities" className="text-sm text-[var(--color-accent)] hover:underline underline-offset-4">
+            すべて見る
+          </Link>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           {recommended.map((f: any, idx: number) => (
-            <Link key={f.id} href={`/facilities/${f.id}`} className="group block bg-white border border-[var(--color-border)] rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-              <div className="aspect-[16/9] relative overflow-hidden">
+            <Link key={f.id} href={`/facilities/${f.id}`} className="group block bg-white border border-[var(--color-border)] rounded-2xl overflow-hidden card-hover">
+              <div className="aspect-[4/3] relative overflow-hidden">
                 {f.image_url && (
-                  <Image src={f.image_url} alt={f.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="33vw" unoptimized />
+                  <Image src={f.image_url} alt={f.name} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="33vw" unoptimized />
                 )}
                 {!f.image_url && (
                   <div className="absolute inset-0 flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${seedColors[idx % 12]}40, ${seedColors[(idx+5) % 12]}40)` }}>
-                    <span className="font-serif text-4xl" style={{ color: `${seedColors[(idx+2) % 12]}50` }}>{f.name.charAt(0)}</span>
+                    <span className="font-serif text-5xl" style={{ color: `${seedColors[(idx+2) % 12]}60` }}>{f.name.charAt(0)}</span>
                   </div>
                 )}
                 {f.total_score != null && (
-                  <div className="absolute top-3 right-3">
-                    <span className="text-xs px-2 py-0.5 bg-white/90 text-[var(--color-accent)] rounded font-medium">{(f.total_score as number).toFixed(1)}</span>
+                  <div className="absolute top-4 right-4">
+                    <span className="text-xs px-3 py-1 bg-white/95 text-[var(--color-accent)] rounded-full font-medium shadow-sm">{(f.total_score as number).toFixed(1)}</span>
                   </div>
                 )}
               </div>
-              <div className="p-4">
-                <h3 className="font-serif text-lg text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors mb-1">{f.name}</h3>
-                <p className="text-xs text-[var(--color-text-muted)] mb-2">{f.prefecture} {f.city}{f.founded_year ? ` / ${f.founded_year}年創業` : ""}</p>
+              <div className="p-5">
+                <h3 className="font-serif text-lg text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors mb-2">{f.name}</h3>
+                <p className="text-xs text-[var(--color-text-muted)] mb-3 flex items-center gap-2">
+                  <span className="inline-block w-1 h-1 rounded-full bg-miratuku-terracotta" />
+                  {f.prefecture} {f.city}{f.founded_year ? ` / ${f.founded_year}年創業` : ""}
+                </p>
                 <p className="text-sm text-[var(--color-text-muted)] leading-relaxed line-clamp-3">{f.overview}</p>
               </div>
             </Link>
@@ -200,23 +221,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Kanto Sub-areas */}
-      <section className="bg-white border-t border-b border-[var(--color-border)] py-12 md:py-16">
+      {/* Kanto Sub-areas — with sage accent */}
+      <section className="section-sage py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-8">
-            <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">Area</p>
+          <div className="mb-10">
+            <p className="text-xs tracking-[0.3em] text-[var(--color-sage)] mb-2 uppercase font-medium">Area</p>
             <h2 className="font-serif text-2xl md:text-3xl text-[var(--color-text)]">関東エリア別</h2>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             {kantoAreas.filter(a => a.count > 0).map((area, i) => (
               <Link key={i} href={`/facilities?area=${encodeURIComponent(area.name)}`}
-                className="group border border-[var(--color-border)] rounded-lg p-4 hover:border-[var(--color-accent)] hover:bg-miratuku-pale-peach/10 transition-all">
-                <p className="font-serif text-sm text-[var(--color-text)] group-hover:text-[var(--color-accent)]">{area.name}</p>
-                <p className="text-xs text-[var(--color-text-muted)] mt-1">{area.count}件</p>
+                className="group bg-white border border-[var(--color-border)] rounded-xl p-5 card-hover">
+                <p className="font-serif text-sm text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">{area.name}</p>
+                <p className="text-xs text-[var(--color-text-muted)] mt-2">{area.count}件</p>
               </Link>
             ))}
           </div>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-wrap gap-3">
             {[
               { name: "関西", href: "/kansai" },
               { name: "中部・北陸", href: "/chubu" },
@@ -225,7 +246,7 @@ export default function Home() {
               { name: "九州・沖縄", href: "/kyushu" },
             ].map((r) => (
               <Link key={r.name} href={r.href}
-                className="text-sm px-4 py-2 border border-[var(--color-accent)]/30 text-[var(--color-accent)] rounded-full hover:bg-[var(--color-accent)] hover:text-white transition-colors">
+                className="text-sm px-5 py-2.5 bg-white border border-[var(--color-sage)]/30 text-[var(--color-sage)] rounded-full hover:bg-[var(--color-sage)] hover:text-white hover:border-[var(--color-sage)] transition-all">
                 {r.name}
               </Link>
             ))}
@@ -233,107 +254,115 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Themes */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="mb-8">
-          <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">Theme</p>
+      {/* Themes — emoji cards with warm bg */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div className="mb-10">
+          <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase font-medium">Theme</p>
           <h2 className="font-serif text-2xl md:text-3xl text-[var(--color-text)]">テーマで探す</h2>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
           {themes.map((theme, i) => (
             <Link key={i} href={`/facilities?theme=${theme.filter}`}
-              className="group border border-[var(--color-border)] rounded-lg p-5 hover:border-[var(--color-accent)] hover:bg-miratuku-pale-peach/10 transition-all">
-              <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm mb-3"
-                style={{ backgroundColor: `${seedColors[i % 12]}25`, color: seedColors[(i+4) % 12] }}>
-                {theme.icon}
+              className="group bg-white border border-[var(--color-border)] rounded-2xl p-6 card-hover">
+              <div className="text-3xl mb-4 group-hover:scale-110 transition-transform duration-300 inline-block">
+                {theme.emoji}
               </div>
-              <h3 className="font-serif text-sm text-[var(--color-text)] group-hover:text-[var(--color-accent)] mb-1">{theme.name}</h3>
+              <h3 className="font-serif text-sm text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors mb-2">{theme.name}</h3>
               <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">{theme.desc}</p>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* Eras */}
-      <section className="bg-white border-t border-b border-[var(--color-border)] py-12 md:py-16">
+      {/* Eras — timeline style */}
+      <section className="section-warm py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-8">
-            <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">Era</p>
+          <div className="mb-10">
+            <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase font-medium">Era</p>
             <h2 className="font-serif text-2xl md:text-3xl text-[var(--color-text)]">時代で探す</h2>
           </div>
-          <div className="flex flex-wrap gap-3">
-            {eras.map((era, i) => (
-              <Link key={i} href={`/facilities?era=${era.min}-${era.max}`}
-                className="group flex items-center gap-3 border border-[var(--color-border)] rounded-lg px-5 py-3 hover:border-[var(--color-accent)] hover:bg-miratuku-pale-peach/10 transition-all">
-                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: seedColors[i * 2 % 12] }} />
-                <div>
-                  <p className="font-serif text-sm text-[var(--color-text)] group-hover:text-[var(--color-accent)]">{era.name}</p>
-                  <p className="text-xs text-[var(--color-text-muted)]">{era.range} ({(era as Record<string, unknown>).count as number}件)</p>
-                </div>
-              </Link>
-            ))}
+          {/* Timeline bar */}
+          <div className="relative">
+            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-[var(--color-border)] -translate-y-1/2 rounded-full" />
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 gap-4">
+              {eras.map((era, i) => (
+                <Link key={i} href={`/facilities?era=${era.min}-${era.max}`}
+                  className="group relative bg-white border border-[var(--color-border)] rounded-xl px-4 py-5 text-center card-hover">
+                  <div className="w-4 h-4 rounded-full mx-auto mb-3 transition-transform group-hover:scale-150"
+                    style={{ backgroundColor: era.color }} />
+                  <p className="font-serif text-sm text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors">{era.name}</p>
+                  <p className="text-xs text-[var(--color-text-muted)] mt-1">{(era as Record<string, unknown>).count as number}件</p>
+                  <p className="text-[10px] text-[var(--color-text-muted)]/60 mt-0.5">{era.range}</p>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* AI Search & Features */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
         {/* AI Search */}
-        <div className="mb-12">
+        <div className="mb-16">
           <div className="mb-6">
-            <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">AI Search</p>
+            <p className="text-xs tracking-[0.3em] text-[var(--color-sage)] mb-2 uppercase font-medium">AI Search</p>
             <h2 className="font-serif text-2xl md:text-3xl text-[var(--color-text)]">場所性で探す</h2>
-            <p className="text-sm text-[var(--color-text-muted)] mt-2">シーンや気分を入力すると、AIが場所性の観点からおすすめを提案します</p>
+            <p className="text-sm text-[var(--color-text-muted)] mt-3">シーンや気分を入力すると、AIが場所性の観点からおすすめを提案します</p>
           </div>
-          <div className="bg-white border border-[var(--color-border)] rounded-lg p-6">
+          <div className="bg-white border border-[var(--color-border)] rounded-2xl p-8">
             <div className="flex gap-3">
               <input
                 type="text"
-                placeholder="例: 「明治の洋館で特別な記念日ディナー」「文豪が愛した静かな純喫茶」「パリ仕込みの本格クロワッサン」"
-                className="flex-1 px-4 py-3 border border-[var(--color-border)] rounded-lg text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)]/40 focus:outline-none focus:border-[var(--color-accent)]"
+                placeholder="例: 「明治の洋館で特別な記念日ディナー」「文豪が愛した静かな純喫茶」"
+                className="flex-1 px-5 py-4 border border-[var(--color-border)] rounded-xl text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-muted)]/40 focus:outline-none focus:border-[var(--color-sage)] focus:ring-2 focus:ring-[var(--color-sage)]/20 transition-all"
                 disabled
               />
               <button
-                className="px-6 py-3 bg-[var(--color-accent)] text-white text-sm rounded-lg opacity-60 cursor-not-allowed"
+                className="px-8 py-4 bg-[var(--color-sage)] text-white text-sm rounded-xl opacity-50 cursor-not-allowed"
                 disabled
               >
                 検索
               </button>
             </div>
-            <p className="text-xs text-[var(--color-text-muted)]/50 mt-3">Coming Soon — AI検索機能は現在開発中です</p>
+            <p className="text-xs text-[var(--color-text-muted)]/50 mt-4">Coming Soon — AI検索機能は現在開発中です</p>
           </div>
         </div>
 
         {/* Feature Reports */}
         <div>
-          <div className="mb-6">
-            <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">Feature</p>
+          <div className="mb-8">
+            <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase font-medium">Feature</p>
             <h2 className="font-serif text-2xl md:text-3xl text-[var(--color-text)]">特集</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <a href="/report-bashosei.html" className="group block bg-white border border-[var(--color-border)] rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-              <div className="aspect-[2/1] relative miratuku-gradient flex items-center justify-center">
-                <div className="text-center text-white p-6">
-                  <p className="text-xs tracking-widest text-white/60 mb-2">REPORT</p>
-                  <p className="font-serif text-xl">場所性（Basho-sei）とは何か</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <a href="/report-bashosei.html" className="group block bg-white border border-[var(--color-border)] rounded-2xl overflow-hidden card-hover">
+              <div className="aspect-[2/1] relative overflow-hidden">
+                <div className="absolute inset-0 miratuku-gradient" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center text-white p-6">
+                    <p className="text-xs tracking-widest text-white/50 mb-3">REPORT</p>
+                    <p className="font-serif text-xl md:text-2xl">場所性（Basho-sei）<br />とは何か</p>
+                  </div>
                 </div>
               </div>
-              <div className="p-5">
+              <div className="p-6">
                 <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
                   西田幾多郎の場所論、ブルデューの文化資本、現象学的場所論を統合した
                   「場所性」の理論的基盤と8軸評価フレームワークについての詳細レポート。
                 </p>
               </div>
             </a>
-            <Link href="/about" className="group block bg-white border border-[var(--color-border)] rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-              <div className="aspect-[2/1] relative flex items-center justify-center"
-                style={{ background: "linear-gradient(135deg, #966D5E 0%, #7A4033 100%)" }}>
-                <div className="text-center text-white p-6">
-                  <p className="text-xs tracking-widest text-white/60 mb-2">ABOUT</p>
-                  <p className="font-serif text-xl">場所性の8軸フレームワーク</p>
+            <Link href="/about" className="group block bg-white border border-[var(--color-border)] rounded-2xl overflow-hidden card-hover">
+              <div className="aspect-[2/1] relative overflow-hidden">
+                <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, #7a9e8e 0%, #5a7e6e 100%)" }} />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center text-white p-6">
+                    <p className="text-xs tracking-widest text-white/50 mb-3">ABOUT</p>
+                    <p className="font-serif text-xl md:text-2xl">場所性の<br />8軸フレームワーク</p>
+                  </div>
                 </div>
               </div>
-              <div className="p-5">
+              <div className="p-6">
                 <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
                   歴史的継続性、文化的営みの深度、地域的固有性、本物性 —
                   飲食店・宿泊施設の場所性を評価する8つの軸の解説。
@@ -343,58 +372,71 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-10 text-center">
-          <Link href="/facilities" className="inline-block border border-[var(--color-accent)]/30 text-[var(--color-accent)] px-8 py-3 text-sm tracking-wider hover:bg-[var(--color-accent)] hover:text-white transition-colors rounded">
+        <div className="mt-12 text-center">
+          <Link href="/facilities" className="inline-block bg-[var(--color-accent)] text-white px-10 py-4 text-sm tracking-wider hover:bg-[var(--color-accent-light)] transition-colors rounded-xl">
             すべての飲食店を見る
           </Link>
         </div>
       </section>
 
-      {/* 8 Axes (compact) */}
-      <section className="miratuku-gradient text-white py-12 md:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-8">
-            <p className="text-xs tracking-[0.3em] text-white/50 mb-2 uppercase">Framework</p>
-            <h2 className="font-serif text-2xl md:text-3xl">場所性の8軸</h2>
+      {/* 8 Axes (compact) — sage accent */}
+      <section className="relative overflow-hidden py-16 md:py-24" style={{ background: "linear-gradient(135deg, #7a9e8e 0%, #5a7e6e 50%, #4a6e5e 100%)" }}>
+        <div className="absolute inset-0 overflow-hidden">
+          {[0,1,2,3,4].map((i) => (
+            <div key={i} className="absolute rounded-full opacity-10 seed-float" style={{
+              backgroundColor: "#fff",
+              width: `${60 + i * 20}px`,
+              height: `${80 + i * 25}px`,
+              top: `${10 + i * 18}%`,
+              left: `${10 + i * 20}%`,
+              ["--seed-rotate" as string]: `${i * 45}deg`,
+              ["--seed-duration" as string]: `${5 + i}s`,
+              ["--seed-delay" as string]: `${i * 0.5}s`,
+            }} />
+          ))}
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <p className="text-xs tracking-[0.3em] text-white/40 mb-2 uppercase font-medium">Framework</p>
+            <h2 className="font-serif text-2xl md:text-3xl text-white">場所性の8軸</h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               "歴史的継続性", "文化的営みの深度", "地域的固有性", "物質的文化財性",
               "場所の内側性", "文化的複雑性", "ナラティブ性", "本物性",
             ].map((axis, i) => (
-              <div key={i} className="bg-white/10 backdrop-blur-sm border border-white/15 rounded-lg p-4">
-                <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs mb-2"
-                  style={{ backgroundColor: seedColors[i], color: i > 8 ? "#fff" : "#7A4033" }}>
+              <div key={i} className="bg-white/12 backdrop-blur-sm border border-white/15 rounded-xl p-5 hover:bg-white/20 transition-colors">
+                <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium mb-3 bg-white/20 text-white">
                   {i + 1}
                 </div>
-                <p className="text-sm text-white/90">{axis}</p>
+                <p className="text-sm text-white/90 font-medium">{axis}</p>
               </div>
             ))}
           </div>
-          <div className="mt-6 text-center">
-            <Link href="/about" className="text-sm text-white/60 hover:text-white transition-colors">
-              場所性について詳しく見る →
+          <div className="mt-8 text-center">
+            <Link href="/about" className="text-sm text-white/50 hover:text-white transition-colors underline underline-offset-4 decoration-white/20 hover:decoration-white/60">
+              場所性について詳しく見る
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="mb-8">
-          <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase">Categories</p>
+      {/* Categories — wider cards */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div className="mb-10">
+          <p className="text-xs tracking-[0.3em] text-miratuku-terracotta mb-2 uppercase font-medium">Categories</p>
           <h2 className="font-serif text-2xl md:text-3xl text-[var(--color-text)]">カテゴリ別に探す</h2>
         </div>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-5">
           {sortedCategories.map(([cat, count], idx) => (
             <Link key={cat} href={`/facilities?category=${cat}`}
-              className="group relative aspect-[3/2] overflow-hidden flex items-end rounded-lg"
+              className="group relative aspect-[3/2] overflow-hidden flex items-end rounded-2xl card-hover"
               style={{ background: `linear-gradient(135deg, ${seedColors[idx * 2]} 0%, ${seedColors[(idx * 2 + 3) % 12]} 100%)` }}>
-              <div className="absolute inset-0 bg-[var(--color-accent)]/40 group-hover:bg-[var(--color-accent)]/50 transition-all" />
+              <div className="absolute inset-0 bg-[var(--color-accent)]/30 group-hover:bg-[var(--color-accent)]/45 transition-all duration-500" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="font-serif text-6xl text-white/10">{(categoryLabels[cat] || cat).charAt(0)}</span>
+                <span className="font-serif text-7xl text-white/8 group-hover:text-white/15 transition-colors duration-500">{(categoryLabels[cat] || cat).charAt(0)}</span>
               </div>
-              <div className="relative p-4 w-full">
+              <div className="relative p-5 w-full">
                 <p className="font-serif text-lg text-white">{categoryLabels[cat] || cat}</p>
                 <p className="text-white/60 text-sm">{count}件</p>
               </div>
@@ -404,11 +446,11 @@ export default function Home() {
       </section>
 
       {/* MIRA TUKU Credit */}
-      <section className="bg-white border-t border-[var(--color-border)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-center">
-          <p className="text-xs tracking-[0.4em] text-[var(--color-text-muted)]/60 mb-2">CREATED BY</p>
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center">
+          <p className="text-xs tracking-[0.4em] text-[var(--color-text-muted)]/50 mb-3">CREATED BY</p>
           <p className="tracking-[0.3em] text-[var(--color-accent)] font-medium text-lg">MIRA TUKU</p>
-          <p className="text-sm text-[var(--color-text-muted)] mt-2">NPO法人ミラツク — 多様な人々が集い、未来をつくる</p>
+          <p className="text-sm text-[var(--color-text-muted)] mt-3">NPO法人ミラツク — 多様な人々が集い、未来をつくる</p>
         </div>
       </section>
     </div>

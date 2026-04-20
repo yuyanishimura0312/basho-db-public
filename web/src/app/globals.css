@@ -21,10 +21,16 @@
   --color-accent: #783c28;
   --color-accent-light: #964d33;
   --color-bg: #faf8f5;
-  --color-text: #1a1a1a;
+  --color-text: #2b2b2b;
   --color-text-muted: #6b5c52;
-  --color-border: #e8ddd4;
+  --color-border: #ece5dc;
   --color-card: #ffffff;
+
+  /* Nordic accent colors */
+  --color-sage: #7a9e8e;
+  --color-sage-light: #a8c5b6;
+  --color-sage-bg: #f0f5f2;
+  --color-warm-bg: #fdf6ef;
 }
 
 body {
@@ -44,4 +50,64 @@ body {
 
 .miratuku-gradient-light {
   background: linear-gradient(135deg, #F8CDAC 0%, #F2C792 30%, #F1C189 60%, #EFC4A4 100%);
+}
+
+/* Hero wave divider */
+.hero-wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+.hero-wave svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 60px;
+}
+
+/* Floating seed animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(var(--seed-rotate)); }
+  50% { transform: translateY(-12px) rotate(calc(var(--seed-rotate) + 8deg)); }
+}
+.seed-float {
+  animation: float var(--seed-duration, 4s) ease-in-out infinite;
+  animation-delay: var(--seed-delay, 0s);
+}
+
+/* Card hover lift */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px -8px rgba(120, 60, 40, 0.12);
+}
+
+/* Soft section transition backgrounds */
+.section-warm {
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-warm-bg) 100%);
+}
+.section-sage {
+  background: linear-gradient(180deg, var(--color-bg) 0%, #e8f0eb 100%);
+}
+
+/* Timeline connector */
+.timeline-dot {
+  position: relative;
+}
+.timeline-dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -1rem;
+  width: 1rem;
+  height: 2px;
+  background: var(--color-border);
+}
+.timeline-dot:last-child::after {
+  display: none;
 }
