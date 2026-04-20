@@ -6,13 +6,13 @@ import "./globals.css";
 const notoSerif = Noto_Serif_JP({
   variable: "--font-serif-jp",
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "700", "900"],
 });
 
 const notoSans = Noto_Sans_JP({
   variable: "--font-sans-jp",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
+  weight: ["300", "400", "500"],
 });
 
 export const metadata: Metadata = {

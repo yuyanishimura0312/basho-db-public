@@ -39,9 +39,14 @@
 
 body {
   font-family: var(--font-sans-jp), sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.8;
   background-color: var(--color-bg);
   color: var(--color-text);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .font-serif {

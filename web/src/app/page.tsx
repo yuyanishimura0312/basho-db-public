@@ -110,11 +110,11 @@ export default function Home() {
           ))}
         </div>
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12 pb-24 md:pb-32 w-full">
-          <p className="text-[0.7rem] tracking-[0.5em] text-white/30 mb-8 uppercase">BASHO &mdash; PLACENESS</p>
-          <h1 className="font-serif text-[clamp(3rem,8vw,7rem)] leading-[1.15] tracking-wide text-white font-bold mb-8">
+          <p className="text-[0.78rem] tracking-[0.5em] text-white/30 mb-8 uppercase">BASHO &mdash; PLACENESS</p>
+          <h1 className="font-serif text-[clamp(3.4rem,8vw,7rem)] leading-[1.08] text-white font-black mb-8">
             場所の記憶を<br />辿り、まだ見ぬ<br />食に出会う
           </h1>
-          <p className="text-white/50 text-lg max-w-[500px] leading-[1.9] mb-12 font-light">
+          <p className="text-white/50 text-base max-w-[500px] leading-[1.9] mb-12 font-light">
             トレンドでも口コミでもない。歴史と文化が堆積した「場所性」という新しい軸で、あなたにふさわしい一皿を見つける。
           </p>
           <div className="flex flex-wrap gap-4">
@@ -156,11 +156,11 @@ export default function Home() {
               { val: stats.oldest_year || "—", unit: "年", label: "最古の創業" },
             ].map((s, i) => (
               <div key={i}>
-                <p className="font-serif text-5xl md:text-6xl font-bold text-white leading-none">
+                <p className="font-serif text-5xl md:text-7xl font-black text-white leading-none">
                   {s.val}
                   {s.unit && <span className="text-lg text-white/30 ml-1 font-light">{s.unit}</span>}
                 </p>
-                <p className="text-[0.7rem] text-white/35 mt-3 tracking-[0.25em] uppercase">{s.label}</p>
+                <p className="text-[0.78rem] text-white/35 mt-3 tracking-[0.25em] uppercase">{s.label}</p>
               </div>
             ))}
           </div>
@@ -171,8 +171,8 @@ export default function Home() {
       <section className="max-w-[1400px] mx-auto px-6 lg:px-12 py-24">
         <div className="flex justify-between items-end mb-12">
           <div>
-            <p className="text-[0.65rem] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-2 font-medium">Today&apos;s Pick</p>
-            <h2 className="font-serif text-[clamp(2rem,5vw,3rem)] font-bold">今日のおすすめ</h2>
+            <p className="text-[0.78rem] tracking-[0.3em] uppercase text-[var(--color-accent)] mb-2 font-medium">Today&apos;s Pick</p>
+            <h2 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.15]">今日のおすすめ</h2>
           </div>
           <Link href="/facilities" className="text-sm text-[var(--color-accent)] hover:underline underline-offset-4">すべて見る</Link>
         </div>
@@ -195,9 +195,9 @@ export default function Home() {
                 )}
               </div>
               <div className="pt-4 pb-2">
-                <h3 className="font-serif text-lg group-hover:text-[var(--color-accent)] transition-colors mb-1">{f.name}</h3>
-                <p className="text-[0.7rem] text-[var(--color-text-muted)] mb-2">{f.prefecture} {f.city}{f.founded_year ? ` / ${f.founded_year}年創業` : ""}</p>
-                <p className="text-[0.82rem] text-[var(--color-text-muted)] leading-relaxed line-clamp-2">{f.overview}</p>
+                <h3 className="font-serif text-[1.15rem] font-medium group-hover:text-[var(--color-accent)] transition-colors mb-1 leading-snug">{f.name}</h3>
+                <p className="text-[0.78rem] text-[var(--color-text-muted)] mb-2">{f.prefecture} {f.city}{f.founded_year ? ` / ${f.founded_year}年創業` : ""}</p>
+                <p className="text-[0.9rem] text-[var(--color-text-muted)] leading-relaxed line-clamp-2">{f.overview}</p>
               </div>
             </Link>
           ))}
@@ -209,8 +209,8 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-12 items-center">
             <div>
-              <p className="text-[0.65rem] tracking-[0.35em] uppercase text-white/30 mb-3 font-medium">Discover</p>
-              <h2 className="font-serif text-[clamp(2rem,5vw,3rem)] font-bold text-white leading-snug mb-4">あなたにぴったりの<br />場所は？</h2>
+              <p className="text-[0.78rem] tracking-[0.3em] uppercase text-white/30 mb-3 font-medium">Discover</p>
+              <h2 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.15] text-white leading-snug mb-4">あなたにぴったりの<br />場所は？</h2>
               <p className="text-sm text-white/40 leading-relaxed">気分やシーンに合わせて、場所性の観点からおすすめの店舗をご提案します。</p>
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -235,15 +235,15 @@ export default function Home() {
       <section className="py-24">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="mb-12">
-            <p className="text-[0.65rem] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-2 font-medium">Area</p>
-            <h2 className="font-serif text-[clamp(2rem,5vw,3rem)] font-bold">関東エリア別</h2>
+            <p className="text-[0.78rem] tracking-[0.3em] uppercase text-[var(--color-accent)] mb-2 font-medium">Area</p>
+            <h2 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.15]">関東エリア別</h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-px bg-[var(--color-border)]">
             {kantoAreas.filter(a => a.count > 0).map((area, i) => (
               <Link key={i} href={`/facilities?area=${encodeURIComponent(area.name)}`}
                 className="group bg-[var(--color-bg)] p-6 hover:bg-[var(--color-accent)] transition-colors">
                 <p className="font-serif text-sm group-hover:text-white transition-colors">{area.name}</p>
-                <p className="text-[0.7rem] text-[var(--color-text-light)] group-hover:text-white/50 mt-1 transition-colors">{area.count}件</p>
+                <p className="text-[0.78rem] text-[var(--color-text-light)] group-hover:text-white/50 mt-1 transition-colors">{area.count}件</p>
               </Link>
             ))}
           </div>
@@ -268,16 +268,16 @@ export default function Home() {
       <section className="py-24" style={{ background: TEAL_MID }}>
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="mb-12">
-            <p className="text-[0.65rem] tracking-[0.35em] uppercase text-white/30 mb-2 font-medium">Theme</p>
-            <h2 className="font-serif text-[clamp(2rem,5vw,3rem)] font-bold text-white">テーマで探す</h2>
+            <p className="text-[0.78rem] tracking-[0.3em] uppercase text-white/30 mb-2 font-medium">Theme</p>
+            <h2 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.15] text-white">テーマで探す</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/8">
             {themes.map((theme, i) => (
               <Link key={i} href={`/facilities?theme=${theme.filter}`}
                 className="group bg-[#0d3a47] p-7 hover:bg-[#1a5c6e] transition-colors">
-                <span className="font-serif text-[2.5rem] text-white/8 group-hover:text-white/20 block mb-3 leading-none transition-colors">{theme.glyph}</span>
-                <h3 className="font-serif text-sm text-white/80 group-hover:text-white transition-colors mb-1">{theme.name}</h3>
-                <p className="text-[0.72rem] text-white/35 leading-relaxed">{theme.desc}</p>
+                <span className="font-serif text-[3rem] font-black text-white/6 group-hover:text-white/15 block mb-3 leading-none transition-colors">{theme.glyph}</span>
+                <h3 className="font-serif text-[0.9rem] font-medium text-white/80 group-hover:text-white transition-colors mb-1.5 leading-snug">{theme.name}</h3>
+                <p className="text-[0.78rem] text-white/35 leading-relaxed">{theme.desc}</p>
               </Link>
             ))}
           </div>
@@ -288,8 +288,8 @@ export default function Home() {
       <section className="py-24">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="mb-12">
-            <p className="text-[0.65rem] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-2 font-medium">Era</p>
-            <h2 className="font-serif text-[clamp(2rem,5vw,3rem)] font-bold">時代で探す</h2>
+            <p className="text-[0.78rem] tracking-[0.3em] uppercase text-[var(--color-accent)] mb-2 font-medium">Era</p>
+            <h2 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.15]">時代で探す</h2>
           </div>
           <div className="relative">
             <div className="hidden md:block absolute top-8 left-0 right-0 h-px bg-[var(--color-border)]" />
@@ -301,7 +301,7 @@ export default function Home() {
                     {String(i + 1).padStart(2, "0")}
                   </p>
                   <p className="font-serif text-sm group-hover:text-white transition-colors">{era.name}</p>
-                  <p className="text-[0.7rem] text-[var(--color-text-light)] group-hover:text-white/50 mt-1 transition-colors">
+                  <p className="text-[0.78rem] text-[var(--color-text-light)] group-hover:text-white/50 mt-1 transition-colors">
                     {(era as Record<string, unknown>).count as number}件
                   </p>
                   <p className="text-[0.6rem] text-[var(--color-text-light)]/50 group-hover:text-white/30 mt-0.5 transition-colors">{era.range}</p>
@@ -316,8 +316,8 @@ export default function Home() {
       <section className="py-24" style={{ background: TEAL_MID }}>
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="mb-12">
-            <p className="text-[0.65rem] tracking-[0.35em] uppercase text-white/30 mb-2 font-medium">Feature</p>
-            <h2 className="font-serif text-[clamp(2rem,5vw,3rem)] font-bold text-white">特集</h2>
+            <p className="text-[0.78rem] tracking-[0.3em] uppercase text-white/30 mb-2 font-medium">Feature</p>
+            <h2 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.15] text-white">特集</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <a href="/report-bashosei.html" className="group block overflow-hidden bg-white/4 border border-white/8 hover:bg-white/8 transition-colors">
@@ -328,7 +328,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="p-6">
-                <p className="text-[0.82rem] text-white/50 leading-relaxed">
+                <p className="text-[0.9rem] text-white/50 leading-relaxed">
                   西田幾多郎の場所論、ブルデューの文化資本、現象学的場所論を統合した「場所性」の理論的基盤と8軸評価フレームワーク。
                 </p>
               </div>
@@ -342,7 +342,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="p-6">
-                <p className="text-[0.82rem] text-white/50 leading-relaxed">
+                <p className="text-[0.9rem] text-white/50 leading-relaxed">
                   歴史的継続性、文化的営みの深度、地域的固有性、本物性 — 飲食店・宿泊施設の場所性を評価する8つの軸。
                 </p>
               </div>
@@ -355,8 +355,8 @@ export default function Home() {
       <section className="py-24">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="mb-8">
-            <p className="text-[0.65rem] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-2 font-medium">AI Search</p>
-            <h2 className="font-serif text-[clamp(2rem,5vw,3rem)] font-bold">場所性で探す</h2>
+            <p className="text-[0.78rem] tracking-[0.3em] uppercase text-[var(--color-accent)] mb-2 font-medium">AI Search</p>
+            <h2 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.15]">場所性で探す</h2>
             <p className="text-sm text-[var(--color-text-muted)] mt-3">シーンや気分を入力すると、AIが場所性の観点からおすすめを提案します</p>
           </div>
           <div className="flex gap-3">
@@ -374,8 +374,8 @@ export default function Home() {
       <section className="py-24" style={{ background: TEAL }}>
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="mb-12">
-            <p className="text-[0.65rem] tracking-[0.35em] uppercase text-white/25 mb-2 font-medium">Framework</p>
-            <h2 className="font-serif text-[clamp(2rem,5vw,3rem)] font-bold text-white">場所性の8軸</h2>
+            <p className="text-[0.78rem] tracking-[0.3em] uppercase text-white/25 mb-2 font-medium">Framework</p>
+            <h2 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.15] text-white">場所性の8軸</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/8">
             {[
@@ -383,10 +383,10 @@ export default function Home() {
               "場所の内側性", "文化的複雑性", "ナラティブ性", "本物性",
             ].map((axis, i) => (
               <div key={i} className="bg-[#0a2e38] p-7 hover:bg-[#144a59] transition-colors">
-                <p className="font-serif text-[3rem] font-bold text-white/6 leading-none mb-3">
+                <p className="font-serif text-[3.5rem] font-black text-white/5 leading-none mb-3">
                   {String(i + 1).padStart(2, "0")}
                 </p>
-                <p className="text-sm text-white/80 font-medium">{axis}</p>
+                <p className="text-[0.9rem] text-white/80 font-medium leading-snug">{axis}</p>
               </div>
             ))}
           </div>
@@ -397,8 +397,8 @@ export default function Home() {
       <section className="py-24">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="mb-12">
-            <p className="text-[0.65rem] tracking-[0.35em] uppercase text-[var(--color-accent)] mb-2 font-medium">Categories</p>
-            <h2 className="font-serif text-[clamp(2rem,5vw,3rem)] font-bold">カテゴリ別に探す</h2>
+            <p className="text-[0.78rem] tracking-[0.3em] uppercase text-[var(--color-accent)] mb-2 font-medium">Categories</p>
+            <h2 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.15]">カテゴリ別に探す</h2>
           </div>
           <div className="grid grid-cols-3 gap-3">
             {sortedCategories.map(([cat, count], idx) => {
@@ -412,7 +412,7 @@ export default function Home() {
                     {(categoryLabels[cat] || cat).charAt(0)}
                   </span>
                   <div className="relative p-6 w-full">
-                    <p className="font-serif text-2xl text-white font-bold">{categoryLabels[cat] || cat}</p>
+                    <p className="font-serif text-[clamp(1.25rem,3vw,2rem)] text-white font-bold leading-snug">{categoryLabels[cat] || cat}</p>
                     <p className="text-white/40 text-sm mt-1">{count}件</p>
                   </div>
                 </Link>
@@ -424,7 +424,7 @@ export default function Home() {
 
       {/* ━━━ CTA ━━━ teal bg */}
       <section className="py-28 text-center" style={{ background: TEAL_MID }}>
-        <h2 className="font-serif text-[clamp(1.5rem,4vw,2.5rem)] font-bold text-white mb-4">場所の記憶から、あなたの一皿を見つける</h2>
+        <h2 className="font-serif text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-white mb-4 leading-[1.2]">場所の記憶から、あなたの一皿を見つける</h2>
         <p className="text-sm text-white/35 mb-10">670以上の飲食店・宿泊施設を、歴史と文化の視点で探索できます</p>
         <Link href="/facilities" className="inline-block bg-white text-[var(--color-accent)] px-14 py-5 text-sm tracking-[0.2em] hover:bg-white/90 transition-colors">
           すべての飲食店を見る
