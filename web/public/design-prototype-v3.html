@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basho Design v3 — Bold Nordic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #783c28;
+    --primary-dark: #5a2d1a;
+    --green: #1d764a;
+    --green-light: #2a9060;
+    --green-pale: #e8f5ed;
+    --terracotta: #DC8766;
+    --peach: #F7BEA2;
+    --sand: #F0A671;
+    --bg: #faf8f5;
+    --text: #1a1a1a;
+    --text-muted: #6b5c52;
+    --border: #e8ddd4;
+    --serif: 'Noto Serif JP', serif;
+    --sans: 'Noto Sans JP', sans-serif;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:var(--sans); background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  a { text-decoration:none; color:inherit; }
+
+  /* ===== HEADER — minimal, almost invisible ===== */
+  .header {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(250,248,245,0.92); backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(232,221,212,0.5);
+  }
+  .header__inner {
+    max-width:1400px; margin:0 auto; padding:0 3rem;
+    height:56px; display:flex; align-items:center; justify-content:space-between;
+  }
+  .header__logo { display:flex; align-items:center; gap:10px; }
+  .header__seeds { display:flex; gap:2px; }
+  .header__seed { width:7px; height:12px; border-radius:50%; }
+  .header__seed--1 { background:#DC8766; transform:rotate(-20deg); }
+  .header__seed--2 { background:#F0A671; transform:rotate(10deg); }
+  .header__seed--3 { background:#B07256; transform:rotate(30deg); }
+  .header__name { font-family:var(--serif); font-size:1.15rem; letter-spacing:0.12em; color:var(--primary); }
+  .header__sub { font-size:0.65rem; color:var(--text-muted); margin-left:8px; letter-spacing:0.25em; }
+  .header__nav { display:flex; gap:2rem; font-size:0.8rem; letter-spacing:0.08em; color:var(--text-muted); }
+  .header__nav a:hover { color:var(--primary); }
+
+  /* ===== HERO — FULL SCREEN, BOLD TYPE ===== */
+  .hero {
+    min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end;
+    position:relative; overflow:hidden;
+    background:linear-gradient(170deg, #F7BEA2 0%, #F0A671 25%, #DC8766 55%, #B07256 80%, #7A4033 100%);
+  }
+  .hero__seeds { position:absolute; inset:0; z-index:1; }
+  .hero__seed {
+    position:absolute; border-radius:50%; opacity:0.08;
+    animation:seedFloat 8s ease-in-out infinite;
+  }
+  @keyframes seedFloat {
+    0%,100% { transform:translateY(0) rotate(var(--r,0deg)); }
+    50% { transform:translateY(-20px) rotate(calc(var(--r,0deg) + 8deg)); }
+  }
+  .hero__content {
+    position:relative; z-index:2;
+    max-width:1400px; margin:0 auto; padding:0 3rem 6rem; width:100%;
+  }
+  .hero__label {
+    font-size:0.7rem; letter-spacing:0.5em; color:rgba(255,255,255,0.35);
+    margin-bottom:2rem; text-transform:uppercase;
+  }
+  .hero__title {
+    font-family:var(--serif); font-weight:900;
+    font-size:clamp(3rem, 8vw, 7rem); line-height:1.15;
+    color:white; letter-spacing:0.02em;
+    margin-bottom:2rem;
+  }
+  .hero__desc {
+    color:rgba(255,255,255,0.6); font-size:1.1rem; max-width:500px;
+    line-height:1.9; margin-bottom:3rem; font-weight:300;
+  }
+  .hero__actions { display:flex; gap:1rem; }
+  .hero__btn {
+    padding:16px 40px; font-size:0.85rem; letter-spacing:0.2em;
+    transition:all 0.3s; display:inline-block;
+  }
+  .hero__btn--primary { background:white; color:var(--primary); }
+  .hero__btn--primary:hover { background:rgba(255,255,255,0.85); transform:translateY(-2px); }
+  .hero__btn--ghost { border:1.5px solid rgba(255,255,255,0.35); color:white; }
+  .hero__btn--ghost:hover { border-color:white; background:rgba(255,255,255,0.08); }
+  /* Scroll indicator */
+  .hero__scroll {
+    position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
+    z-index:2; color:rgba(255,255,255,0.25); font-size:0.65rem;
+    letter-spacing:0.3em; text-transform:uppercase;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+  }
+  .hero__scroll-line { width:1px; height:40px; background:rgba(255,255,255,0.2); animation:scrollPulse 2s infinite; }
+  @keyframes scrollPulse { 0%,100%{opacity:0.2;height:40px;} 50%{opacity:0.5;height:50px;} }
+
+  /* ===== MARQUEE — BIG AND BOLD ===== */
+  .marquee {
+    background:var(--green); color:white; overflow:hidden;
+    padding:1.25rem 0; white-space:nowrap;
+  }
+  .marquee__track {
+    display:inline-flex; animation:marqueeScroll 25s linear infinite;
+  }
+  .marquee__item {
+    font-family:var(--serif); font-size:1.1rem; letter-spacing:0.08em;
+    padding:0 2.5rem; font-weight:400;
+  }
+  .marquee__dot {
+    display:inline-block; width:6px; height:6px; border-radius:50%;
+    background:rgba(255,255,255,0.3); vertical-align:middle;
+  }
+  @keyframes marqueeScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* ===== STATS — bold numbers ===== */
+  .stats {
+    max-width:1400px; margin:0 auto; padding:4rem 3rem;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:2rem;
+  }
+  .stat { text-align:center; }
+  .stat__val {
+    font-family:var(--serif); font-size:3.5rem; font-weight:900;
+    color:var(--primary); line-height:1;
+  }
+  .stat__unit { font-size:0.85rem; color:var(--text-muted); font-weight:300; margin-left:4px; }
+  .stat__label { font-size:0.7rem; color:var(--text-muted); letter-spacing:0.2em; margin-top:8px; }
+
+  /* ===== SECTION ===== */
+  .section { max-width:1400px; margin:0 auto; padding:5rem 3rem; }
+  .section--full { max-width:100%; padding:5rem 0; }
+  .section--green { background:var(--green); color:white; }
+  .section--greenish { background:var(--green-pale); }
+  .section__inner { max-width:1400px; margin:0 auto; padding:0 3rem; }
+  .section__label {
+    font-size:0.65rem; letter-spacing:0.35em; text-transform:uppercase;
+    color:var(--green); margin-bottom:0.5rem; font-weight:500;
+  }
+  .section--green .section__label { color:rgba(255,255,255,0.35); }
+  .section__heading {
+    font-family:var(--serif); font-weight:900;
+    font-size:clamp(1.5rem, 4vw, 2.5rem); margin-bottom:0.25rem;
+  }
+  .section__header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3rem; }
+  .section__more { font-size:0.8rem; color:var(--primary); letter-spacing:0.05em; }
+  .section__more:hover { text-decoration:underline; text-underline-offset:4px; }
+
+  /* ===== RECOMMENDATION CARDS — asymmetric ===== */
+  .reco { display:grid; grid-template-columns:1.2fr 0.8fr 1fr; gap:12px; }
+  .reco__card { overflow:hidden; border:1px solid var(--border); transition:border-color 0.3s; }
+  .reco__card:hover { border-color:var(--terracotta); }
+  .reco__img { aspect-ratio:4/3; overflow:hidden; position:relative; }
+  .reco__card:first-child .reco__img { aspect-ratio:3/4; }
+  .reco__img-inner {
+    width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+    transition:transform 0.7s ease;
+  }
+  .reco__card:hover .reco__img-inner { transform:scale(1.05); }
+  .reco__char { font-family:var(--serif); font-size:4rem; color:rgba(255,255,255,0.12); }
+  .reco__score {
+    position:absolute; top:12px; right:12px;
+    background:rgba(255,255,255,0.93); color:var(--primary);
+    padding:3px 12px; font-size:0.72rem; font-weight:500;
+  }
+  .reco__body { padding:1.25rem 1.25rem 1.5rem; }
+  .reco__name { font-family:var(--serif); font-size:1rem; margin-bottom:4px; transition:color 0.2s; }
+  .reco__card:hover .reco__name { color:var(--primary); }
+  .reco__meta { font-size:0.7rem; color:var(--text-muted); margin-bottom:8px; }
+  .reco__text { font-size:0.8rem; color:var(--text-muted); line-height:1.7; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+
+  /* ===== QUIZ — large, inviting ===== */
+  .quiz {
+    background:var(--green-pale); border:1px solid rgba(29,118,74,0.15);
+    padding:4rem; display:grid; grid-template-columns:1fr 1.5fr; gap:3rem; align-items:center;
+  }
+  .quiz__left {}
+  .quiz__title { font-family:var(--serif); font-size:2rem; font-weight:900; color:var(--green); line-height:1.4; margin-bottom:0.75rem; }
+  .quiz__desc { font-size:0.9rem; color:var(--text-muted); line-height:1.7; }
+  .quiz__options { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .quiz__opt {
+    padding:1.5rem; border:1px solid rgba(29,118,74,0.2); background:white;
+    font-size:0.85rem; line-height:1.5; color:var(--text);
+    transition:all 0.25s; cursor:pointer;
+  }
+  .quiz__opt:hover { border-color:var(--green); background:var(--green); color:white; }
+  .quiz__opt-emoji { font-size:1.5rem; display:block; margin-bottom:8px; }
+
+  /* ===== AREA — big grid with accent ===== */
+  .area-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  .area-item {
+    border:1px solid var(--border); background:white; padding:1.5rem;
+    transition:all 0.25s;
+  }
+  .area-item:hover { border-color:var(--green); background:var(--green-pale); }
+  .area-item__name { font-family:var(--serif); font-size:0.9rem; }
+  .area-item:hover .area-item__name { color:var(--green); }
+  .area-item__count { font-size:0.7rem; color:var(--text-muted); margin-top:4px; }
+  .region-tags { display:flex; gap:8px; margin-top:1.5rem; flex-wrap:wrap; }
+  .region-tag {
+    padding:10px 24px; border:1.5px solid var(--green); color:var(--green);
+    font-size:0.82rem; letter-spacing:0.05em; transition:all 0.25s;
+  }
+  .region-tag:hover { background:var(--green); color:white; }
+
+  /* ===== THEMES — 2-row staggered ===== */
+  .themes { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  .t-card {
+    border:1px solid var(--border); background:white; padding:1.75rem;
+    transition:border-color 0.25s;
+  }
+  .t-card:hover { border-color:var(--terracotta); }
+  .t-card__emoji { font-size:2.5rem; margin-bottom:1rem; display:block; transition:transform 0.3s; }
+  .t-card:hover .t-card__emoji { transform:scale(1.2) rotate(-5deg); }
+  .t-card__name { font-family:var(--serif); font-size:0.9rem; margin-bottom:4px; transition:color 0.2s; }
+  .t-card:hover .t-card__name { color:var(--primary); }
+  .t-card__desc { font-size:0.72rem; color:var(--text-muted); line-height:1.6; }
+
+  /* ===== ERA — horizontal timeline, big dots ===== */
+  .era-timeline { display:flex; position:relative; padding-top:2rem; }
+  .era-timeline::before {
+    content:''; position:absolute; top:calc(2rem + 16px);
+    left:0; right:0; height:2px; background:var(--border);
+  }
+  .era-item {
+    flex:1; text-align:center; position:relative; padding:0 8px;
+    transition:all 0.25s;
+  }
+  .era-item:hover .era-dot { transform:scale(2); }
+  .era-dot {
+    width:14px; height:14px; border-radius:50%; margin:0 auto 1rem;
+    position:relative; z-index:1; transition:transform 0.3s;
+    box-shadow:0 0 0 4px var(--bg);
+  }
+  .era-name { font-family:var(--serif); font-size:0.9rem; transition:color 0.2s; }
+  .era-item:hover .era-name { color:var(--primary); }
+  .era-count { font-size:0.75rem; color:var(--text-muted); margin-top:2px; }
+  .era-range { font-size:0.6rem; color:var(--text-muted); opacity:0.5; margin-top:2px; }
+
+  /* ===== FEATURES — full width hero cards ===== */
+  .feat-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .feat-card { overflow:hidden; border:1px solid var(--border); transition:border-color 0.3s; }
+  .feat-card:hover { border-color:rgba(120,60,40,0.3); }
+  .feat-visual {
+    aspect-ratio:2/1; display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:2.5rem; color:white;
+  }
+  .feat-visual--warm { background:linear-gradient(135deg, #DC8766, #5a2d1a); }
+  .feat-visual--green { background:linear-gradient(135deg, #4db07e, #1d764a); }
+  .feat-visual__label { font-size:0.6rem; letter-spacing:0.4em; color:rgba(255,255,255,0.4); margin-bottom:1rem; }
+  .feat-visual__title { font-family:var(--serif); font-size:1.5rem; line-height:1.5; font-weight:700; }
+  .feat-body { padding:1.5rem; }
+  .feat-desc { font-size:0.82rem; color:var(--text-muted); line-height:1.7; }
+
+  /* ===== 8 AXES — dramatic ===== */
+  .axes { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  .ax {
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);
+    padding:2rem 1.5rem; transition:background 0.25s;
+  }
+  .ax:hover { background:rgba(255,255,255,0.15); }
+  .ax__num {
+    font-family:var(--serif); font-size:2.5rem; font-weight:900;
+    color:rgba(255,255,255,0.12); line-height:1; margin-bottom:0.75rem;
+  }
+  .ax:hover .ax__num { color:rgba(255,255,255,0.3); }
+  .ax__name { font-size:0.9rem; color:rgba(255,255,255,0.85); font-weight:500; }
+
+  /* ===== CATEGORIES — large visual cards ===== */
+  .cats { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .cat {
+    aspect-ratio:3/2; position:relative; overflow:hidden;
+    display:flex; align-items:flex-end;
+  }
+  .cat__bg { position:absolute; inset:0; transition:transform 0.7s; }
+  .cat:hover .cat__bg { transform:scale(1.06); }
+  .cat__overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(0deg, rgba(26,26,26,0.7) 0%, rgba(26,26,26,0.1) 60%, transparent 100%);
+    transition:opacity 0.3s;
+  }
+  .cat:hover .cat__overlay { opacity:0.9; }
+  .cat__giant {
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    font-family:var(--serif); font-size:8rem; font-weight:900;
+    color:rgba(255,255,255,0.04);
+  }
+  .cat:hover .cat__giant { color:rgba(255,255,255,0.08); }
+  .cat__body { position:relative; padding:1.5rem 1.5rem 1.75rem; width:100%; }
+  .cat__name { font-family:var(--serif); font-size:1.25rem; color:white; font-weight:700; }
+  .cat__count { font-size:0.75rem; color:rgba(255,255,255,0.5); margin-top:2px; }
+
+  /* ===== CTA BANNER ===== */
+  .cta-banner {
+    text-align:center; padding:5rem 3rem;
+    background:linear-gradient(180deg, var(--bg) 0%, #f5ede4 100%);
+  }
+  .cta-banner__title { font-family:var(--serif); font-size:1.5rem; font-weight:700; margin-bottom:1rem; }
+  .cta-banner__desc { font-size:0.85rem; color:var(--text-muted); margin-bottom:2rem; }
+  .cta-banner__btn {
+    display:inline-block; padding:16px 48px; background:var(--primary);
+    color:white; font-size:0.85rem; letter-spacing:0.2em;
+    transition:all 0.3s;
+  }
+  .cta-banner__btn:hover { background:var(--primary-dark); transform:translateY(-2px); }
+
+  /* ===== FOOTER ===== */
+  .footer { background:var(--green); color:rgba(255,255,255,0.8); }
+  .footer__inner {
+    max-width:1400px; margin:0 auto; padding:4rem 3rem;
+    display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:3rem;
+  }
+  .footer__logo { display:flex; align-items:center; gap:8px; margin-bottom:1rem; }
+  .footer__logo-text { font-family:var(--serif); font-size:1.2rem; color:white; letter-spacing:0.15em; }
+  .footer__text { font-size:0.8rem; color:rgba(255,255,255,0.45); line-height:1.8; }
+  .footer__heading { font-size:0.82rem; color:rgba(255,255,255,0.8); font-weight:500; margin-bottom:1rem; }
+  .footer__list { list-style:none; font-size:0.72rem; color:rgba(255,255,255,0.4); line-height:2; }
+  .footer__bottom {
+    max-width:1400px; margin:0 auto; padding:1.5rem 3rem;
+    border-top:1px solid rgba(255,255,255,0.08);
+    display:flex; justify-content:space-between;
+    font-size:0.65rem; color:rgba(255,255,255,0.2); letter-spacing:0.05em;
+  }
+
+  /* ===== DESIGN NOTE ===== */
+  .design-note {
+    position:fixed; bottom:1rem; right:1rem; z-index:200;
+    background:var(--text); color:white; padding:10px 18px;
+    font-size:0.7rem; letter-spacing:0.05em;
+  }
+</style>
+</head>
+<body>
+
+<div class="design-note">Basho v3 — Bold Nordic</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header__inner">
+    <a href="#" class="header__logo">
+      <div class="header__seeds"><div class="header__seed header__seed--1"></div><div class="header__seed header__seed--2"></div><div class="header__seed header__seed--3"></div></div>
+      <span class="header__name">Basho</span><span class="header__sub">場所の記憶</span>
+    </a>
+    <nav class="header__nav"><a href="#">エリア別</a><a href="#">宿</a><a href="#">使い方</a><a href="#">場所性とは</a></nav>
+  </div>
+</header>
+
+<!-- HERO — FULL SCREEN -->
+<section class="hero">
+  <div class="hero__seeds">
+    <div class="hero__seed" style="background:#F2C792;width:70px;height:100px;top:12%;left:6%;--r:-30deg;animation-delay:0s;"></div>
+    <div class="hero__seed" style="background:#F8CDAC;width:50px;height:75px;top:55%;left:20%;--r:20deg;animation-delay:1.5s;"></div>
+    <div class="hero__seed" style="background:#CEA26F;width:60px;height:90px;top:25%;left:70%;--r:45deg;animation-delay:3s;"></div>
+    <div class="hero__seed" style="background:#EFC4A4;width:40px;height:65px;top:65%;left:82%;--r:-15deg;animation-delay:0.7s;"></div>
+    <div class="hero__seed" style="background:#F0BE83;width:55px;height:80px;top:40%;left:50%;--r:30deg;animation-delay:2s;"></div>
+    <div class="hero__seed" style="background:#966D5E;width:45px;height:70px;top:78%;left:40%;--r:-40deg;animation-delay:4s;"></div>
+  </div>
+  <div class="hero__content">
+    <p class="hero__label">BASHO &mdash; PLACENESS</p>
+    <h1 class="hero__title">場所の記憶を<br>辿り、まだ見ぬ<br>食に出会う</h1>
+    <p class="hero__desc">トレンドでも口コミでもない。歴史と文化が堆積した「場所性」という新しい軸で、あなたにふさわしい一皿を見つける。</p>
+    <div class="hero__actions">
+      <a href="#" class="hero__btn hero__btn--primary">食を探す</a>
+      <a href="#" class="hero__btn hero__btn--ghost">宿を探す</a>
+    </div>
+  </div>
+  <div class="hero__scroll"><span>Scroll</span><div class="hero__scroll-line"></div></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee__track">
+    <span class="marquee__item">創業100年を超える老舗 87店舗</span><span class="marquee__item"><span class="marquee__dot"></span></span>
+    <span class="marquee__item">登録有形文化財の建物で味わう至福</span><span class="marquee__item"><span class="marquee__dot"></span></span>
+    <span class="marquee__item">江戸から令和まで、食の場所性を辿る</span><span class="marquee__item"><span class="marquee__dot"></span></span>
+    <span class="marquee__item">トレンドではなく、歴史と文化で選ぶ</span><span class="marquee__item"><span class="marquee__dot"></span></span>
+    <span class="marquee__item">創業100年を超える老舗 87店舗</span><span class="marquee__item"><span class="marquee__dot"></span></span>
+    <span class="marquee__item">登録有形文化財の建物で味わう至福</span><span class="marquee__item"><span class="marquee__dot"></span></span>
+    <span class="marquee__item">江戸から令和まで、食の場所性を辿る</span><span class="marquee__item"><span class="marquee__dot"></span></span>
+    <span class="marquee__item">トレンドではなく、歴史と文化で選ぶ</span><span class="marquee__item"><span class="marquee__dot"></span></span>
+  </div>
+</div>
+
+<!-- STATS — bold -->
+<div class="stats">
+  <div class="stat"><p class="stat__val">670<span class="stat__unit">件</span></p><p class="stat__label">飲食店</p></div>
+  <div class="stat"><p class="stat__val">42</p><p class="stat__label">都道府県</p></div>
+  <div class="stat"><p class="stat__val">8<span class="stat__unit">軸</span></p><p class="stat__label">評価フレームワーク</p></div>
+  <div class="stat"><p class="stat__val">1705<span class="stat__unit">年</span></p><p class="stat__label">最古の創業</p></div>
+</div>
+
+<!-- TODAY'S PICK — asymmetric -->
+<div class="section">
+  <div class="section__header">
+    <div><p class="section__label">Today's Pick</p><h2 class="section__heading">今日のおすすめ</h2></div>
+    <a href="#" class="section__more">すべて見る</a>
+  </div>
+  <div class="reco">
+    <a href="#" class="reco__card">
+      <div class="reco__img">
+        <div class="reco__img-inner" style="background:linear-gradient(135deg,#F0A671,#7A4033)"><span class="reco__char">鮨</span></div>
+        <span class="reco__score">4.2</span>
+      </div>
+      <div class="reco__body"><h3 class="reco__name">鮨 さいとう</h3><p class="reco__meta">東京都 港区 / 1988年創業</p><p class="reco__text">六本木の路地裏に佇む名店。カウンター8席のみの空間で、職人の技が光る江戸前鮨を堪能。</p></div>
+    </a>
+    <a href="#" class="reco__card">
+      <div class="reco__img">
+        <div class="reco__img-inner" style="background:linear-gradient(135deg,#CEA26F,#966D5E)"><span class="reco__char">珈</span></div>
+        <span class="reco__score">3.8</span>
+      </div>
+      <div class="reco__body"><h3 class="reco__name">珈琲 カヤバ</h3><p class="reco__meta">東京都 台東区 / 1938年創業</p><p class="reco__text">谷中の古民家を改装した純喫茶。昭和の空気漂う店内で自家焙煎コーヒーを。</p></div>
+    </a>
+    <a href="#" class="reco__card">
+      <div class="reco__img">
+        <div class="reco__img-inner" style="background:linear-gradient(135deg,#F2C792,#B07256)"><span class="reco__char">洋</span></div>
+        <span class="reco__score">4.5</span>
+      </div>
+      <div class="reco__body"><h3 class="reco__name">資生堂パーラー</h3><p class="reco__meta">東京都 中央区 / 1902年創業</p><p class="reco__text">銀座の象徴。明治から続く洋食文化の礎。伝統のオムライスとミートクロケット。</p></div>
+    </a>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="section">
+  <div class="quiz">
+    <div class="quiz__left">
+      <h3 class="quiz__title">あなたにぴったりの<br>場所は？</h3>
+      <p class="quiz__desc">気分やシーンに合わせて、場所性の観点からおすすめの店舗をご提案します。</p>
+    </div>
+    <div class="quiz__options">
+      <a href="#" class="quiz__opt"><span class="quiz__opt-emoji">🏛</span>歴史ある空間で<br>特別なひとときを</a>
+      <a href="#" class="quiz__opt"><span class="quiz__opt-emoji">📖</span>文豪が愛した<br>静かな隠れ家を</a>
+      <a href="#" class="quiz__opt"><span class="quiz__opt-emoji">🏮</span>下町情緒あふれる<br>庶民の味を</a>
+      <a href="#" class="quiz__opt"><span class="quiz__opt-emoji">✨</span>モダンな空間で<br>新しい食体験を</a>
+    </div>
+  </div>
+</div>
+
+<!-- AREA -->
+<div class="section--full section--greenish">
+  <div class="section__inner" style="padding-top:5rem;padding-bottom:5rem;">
+    <div class="section__header"><div><p class="section__label">Area</p><h2 class="section__heading">関東エリア別</h2></div></div>
+    <div class="area-grid">
+      <a href="#" class="area-item"><p class="area-item__name">銀座・日本橋</p><p class="area-item__count">85件</p></a>
+      <a href="#" class="area-item"><p class="area-item__name">六本木・麻布・赤坂</p><p class="area-item__count">62件</p></a>
+      <a href="#" class="area-item"><p class="area-item__name">渋谷・表参道・青山</p><p class="area-item__count">38件</p></a>
+      <a href="#" class="area-item"><p class="area-item__name">新宿・神楽坂</p><p class="area-item__count">45件</p></a>
+      <a href="#" class="area-item"><p class="area-item__name">浅草・上野・下町</p><p class="area-item__count">52件</p></a>
+      <a href="#" class="area-item"><p class="area-item__name">神田・神保町</p><p class="area-item__count">31件</p></a>
+      <a href="#" class="area-item"><p class="area-item__name">目黒・世田谷・城南</p><p class="area-item__count">28件</p></a>
+      <a href="#" class="area-item"><p class="area-item__name">横浜・神奈川</p><p class="area-item__count">44件</p></a>
+    </div>
+    <div class="region-tags">
+      <a href="#" class="region-tag">関西</a><a href="#" class="region-tag">中部・北陸</a>
+      <a href="#" class="region-tag">北海道・東北</a><a href="#" class="region-tag">中国・四国</a><a href="#" class="region-tag">九州・沖縄</a>
+    </div>
+  </div>
+</div>
+
+<!-- THEMES -->
+<div class="section">
+  <div class="section__header"><div><p class="section__label">Theme</p><h2 class="section__heading">テーマで探す</h2></div></div>
+  <div class="themes">
+    <a href="#" class="t-card"><span class="t-card__emoji">🏯</span><p class="t-card__name">老舗 (100年以上)</p><p class="t-card__desc">創業100年を超える歴史を持つ名店</p></a>
+    <a href="#" class="t-card"><span class="t-card__emoji">⭐</span><p class="t-card__name">発祥の店</p><p class="t-card__desc">「元祖」「発祥」の称号を持つ店</p></a>
+    <a href="#" class="t-card"><span class="t-card__emoji">🏛</span><p class="t-card__name">文化財の建物</p><p class="t-card__desc">登録有形文化財・重要文化財の建物</p></a>
+    <a href="#" class="t-card"><span class="t-card__emoji">📖</span><p class="t-card__name">文豪ゆかりの店</p><p class="t-card__desc">文学者や著名人が愛した場所</p></a>
+    <a href="#" class="t-card"><span class="t-card__emoji">🍷</span><p class="t-card__name">フレンチ & イタリアン</p><p class="t-card__desc">ヨーロッパの食文化を伝える名店</p></a>
+    <a href="#" class="t-card"><span class="t-card__emoji">☕</span><p class="t-card__name">純喫茶 & カフェ</p><p class="t-card__desc">珈琲文化と場所性が交差する空間</p></a>
+    <a href="#" class="t-card"><span class="t-card__emoji">🥐</span><p class="t-card__name">パン & 洋菓子</p><p class="t-card__desc">ベーカリー・パティスリーの名店</p></a>
+    <a href="#" class="t-card"><span class="t-card__emoji">🥃</span><p class="t-card__name">バー & 酒文化</p><p class="t-card__desc">カクテル、ワイン、日本酒の場所性</p></a>
+  </div>
+</div>
+
+<!-- ERA TIMELINE -->
+<div class="section--full" style="background:white;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="section__inner" style="padding-top:5rem;padding-bottom:5rem;">
+    <div class="section__header"><div><p class="section__label">Era</p><h2 class="section__heading">時代で探す</h2></div></div>
+    <div class="era-timeline">
+      <a href="#" class="era-item"><div class="era-dot" style="background:#966D5E"></div><p class="era-name">〜江戸</p><p class="era-count">12件</p><p class="era-range">〜1603</p></a>
+      <a href="#" class="era-item"><div class="era-dot" style="background:#B07256"></div><p class="era-name">江戸</p><p class="era-count">28件</p><p class="era-range">1603-1867</p></a>
+      <a href="#" class="era-item"><div class="era-dot" style="background:#DC8766"></div><p class="era-name">明治</p><p class="era-count">65件</p><p class="era-range">1868-1912</p></a>
+      <a href="#" class="era-item"><div class="era-dot" style="background:#F0A671"></div><p class="era-name">大正</p><p class="era-count">48件</p><p class="era-range">1912-1926</p></a>
+      <a href="#" class="era-item"><div class="era-dot" style="background:#CEA26F"></div><p class="era-name">昭和前期</p><p class="era-count">102件</p><p class="era-range">1926-1945</p></a>
+      <a href="#" class="era-item"><div class="era-dot" style="background:#4db07e"></div><p class="era-name">昭和後期</p><p class="era-count">285件</p><p class="era-range">1945-1989</p></a>
+      <a href="#" class="era-item"><div class="era-dot" style="background:#7ec9a0"></div><p class="era-name">平成以降</p><p class="era-count">130件</p><p class="era-range">1989-</p></a>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="section">
+  <div class="section__header"><div><p class="section__label">Feature</p><h2 class="section__heading">特集</h2></div></div>
+  <div class="feat-grid">
+    <a href="#" class="feat-card">
+      <div class="feat-visual feat-visual--warm"><div><p class="feat-visual__label">REPORT</p><p class="feat-visual__title">場所性（Basho-sei）<br>とは何か</p></div></div>
+      <div class="feat-body"><p class="feat-desc">西田幾多郎の場所論、ブルデューの文化資本、現象学的場所論を統合した「場所性」の理論的基盤と8軸評価フレームワーク。</p></div>
+    </a>
+    <a href="#" class="feat-card">
+      <div class="feat-visual feat-visual--green"><div><p class="feat-visual__label">ABOUT</p><p class="feat-visual__title">場所性の<br>8軸フレームワーク</p></div></div>
+      <div class="feat-body"><p class="feat-desc">歴史的継続性、文化的営みの深度、地域的固有性、本物性 — 飲食店・宿泊施設の場所性を評価する8つの軸。</p></div>
+    </a>
+  </div>
+</div>
+
+<!-- 8 AXES -->
+<div class="section--full section--green">
+  <div class="section__inner" style="padding-top:5rem;padding-bottom:5rem;">
+    <div class="section__header"><div><p class="section__label">Framework</p><h2 class="section__heading" style="color:white;">場所性の8軸</h2></div></div>
+    <div class="axes">
+      <div class="ax"><p class="ax__num">01</p><p class="ax__name">歴史的継続性</p></div>
+      <div class="ax"><p class="ax__num">02</p><p class="ax__name">文化的営みの深度</p></div>
+      <div class="ax"><p class="ax__num">03</p><p class="ax__name">地域的固有性</p></div>
+      <div class="ax"><p class="ax__num">04</p><p class="ax__name">物質的文化財性</p></div>
+      <div class="ax"><p class="ax__num">05</p><p class="ax__name">場所の内側性</p></div>
+      <div class="ax"><p class="ax__num">06</p><p class="ax__name">文化的複雑性</p></div>
+      <div class="ax"><p class="ax__num">07</p><p class="ax__name">ナラティブ性</p></div>
+      <div class="ax"><p class="ax__num">08</p><p class="ax__name">本物性</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="section">
+  <div class="section__header"><div><p class="section__label">Categories</p><h2 class="section__heading">カテゴリ別に探す</h2></div></div>
+  <div class="cats">
+    <a href="#" class="cat"><div class="cat__bg" style="background:linear-gradient(135deg,#F0A671,#DC8766)"></div><div class="cat__overlay"></div><span class="cat__giant">和</span><div class="cat__body"><p class="cat__name">和食</p><p class="cat__count">380件</p></div></a>
+    <a href="#" class="cat"><div class="cat__bg" style="background:linear-gradient(135deg,#CEA26F,#966D5E)"></div><div class="cat__overlay"></div><span class="cat__giant">洋</span><div class="cat__body"><p class="cat__name">洋食</p><p class="cat__count">195件</p></div></a>
+    <a href="#" class="cat"><div class="cat__bg" style="background:linear-gradient(135deg,#4db07e,#1d764a)"></div><div class="cat__overlay"></div><span class="cat__giant">喫</span><div class="cat__body"><p class="cat__name">カフェ・喫茶</p><p class="cat__count">95件</p></div></a>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-banner">
+  <h2 class="cta-banner__title">場所の記憶から、あなたの一皿を見つける</h2>
+  <p class="cta-banner__desc">670以上の飲食店・宿泊施設を、歴史と文化の視点で探索できます</p>
+  <a href="#" class="cta-banner__btn">すべての飲食店を見る</a>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <div class="footer__logo">
+        <div class="header__seeds"><div class="header__seed header__seed--1" style="width:6px;height:10px;"></div><div class="header__seed header__seed--2" style="width:6px;height:10px;"></div><div class="header__seed header__seed--3" style="width:6px;height:10px;"></div></div>
+        <span class="footer__logo-text">Basho</span>
+      </div>
+      <p class="footer__text">歴史と文化に根ざした「場所性」で<br>日本の食と宿を再発見する</p>
+    </div>
+    <div><p class="footer__heading">場所性の8軸</p><ul class="footer__list"><li>歴史的継続性 / 文化的営みの深度</li><li>地域的固有性 / 物質的文化財性</li><li>場所の内側性 / 文化的複雑性</li><li>ナラティブ性 / 本物性</li></ul></div>
+    <div><p class="footer__heading">運営</p><p class="footer__text">NPO法人ミラツク（MIRA TUKU）<br>多様な人々が集い、未来をつくる</p><p class="footer__text" style="margin-top:0.75rem;opacity:0.6;">西田幾多郎の場所論 / ブルデューの文化資本論 /<br>現象学的場所論を理論的基盤とする</p></div>
+  </div>
+  <div class="footer__bottom"><span>Basho &mdash; 場所の記憶 &copy; 2026 NPO法人ミラツク</span><span style="letter-spacing:0.3em;">MIRA TUKU</span></div>
+</footer>
+
+</body>
+</html>
