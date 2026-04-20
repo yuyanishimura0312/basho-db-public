@@ -18,10 +18,10 @@ const diningStats = {
 };
 
 const kantoPrefs = ["東京都","神奈川県","千葉県","埼玉県","群馬県","栃木県","茨城県"];
-const kantoWithPhotos = dining.filter(
-  (f) => f.image_url && f.total_score && f.total_score >= 3.5 && kantoPrefs.includes(f.prefecture || "")
+const withPhotos = dining.filter(
+  (f) => f.image_url && f.image_url.startsWith("http") && !f.image_url.includes("unsplash.com") && f.total_score && f.total_score >= 3.5 && kantoPrefs.includes(f.prefecture || "")
 );
-const shuffled = [...kantoWithPhotos].sort(() => Math.random() - 0.5);
+const shuffled = [...withPhotos].sort(() => Math.random() - 0.5);
 const recommended = shuffled.slice(0, 3);
 
 const categoryLabels: Record<string, string> = {

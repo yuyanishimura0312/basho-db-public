@@ -52,7 +52,7 @@ export default function RegionalPage({
   }
 
   // Regional recommendations (random 3 with photos)
-  const withPhotos = dining.filter((f) => f.image_url && f.total_score && f.total_score >= 3.0);
+  const withPhotos = dining.filter((f) => f.image_url && f.image_url.startsWith("http") && !f.image_url.includes("unsplash.com") && f.total_score && f.total_score >= 3.0);
   const recommended = [...withPhotos].sort(() => Math.random() - 0.5).slice(0, 3);
 
   return (
