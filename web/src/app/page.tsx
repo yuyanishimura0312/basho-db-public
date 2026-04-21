@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import facilities from "@/data/facilities.json";
 import stats from "@/data/stats.json";
+import TodaysPick from "@/components/TodaysPick";
 
 const seedColors = [
   "#F0A671", "#F2C792", "#F1C189", "#CEA26F", "#F8CDAC", "#F0BE83",
@@ -22,7 +23,7 @@ const withPhotos = dining.filter(
   (f) => f.image_url && f.image_url.startsWith("http") && !f.image_url.includes("unsplash.com") && f.total_score && f.total_score >= 3.5 && kantoPrefs.includes(f.prefecture || "")
 );
 const shuffled = [...withPhotos].sort(() => Math.random() - 0.5);
-const recommended = shuffled.slice(0, 3);
+const recommended = shuffled.slice(0, 10);
 
 const categoryLabels: Record<string, string> = {
   restaurant_japanese: "和食",
@@ -168,41 +169,7 @@ export default function Home() {
       </section>
 
       {/* ━━━ TODAY'S PICK ━━━ light section, borderless cards */}
-      <section className="max-w-[1400px] mx-auto px-6 lg:px-12 py-24">
-        <div className="flex justify-between items-end mb-12">
-          <div>
-            <p className="text-[0.78rem] tracking-[0.3em] uppercase text-[var(--color-accent)] mb-2 font-medium">Today&apos;s Pick</p>
-            <h2 className="font-serif text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.15]">今日のおすすめ</h2>
-          </div>
-          <Link href="/facilities" className="text-sm text-[var(--color-accent)] hover:underline underline-offset-4">すべて見る</Link>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr_1fr] gap-3">
-          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-          {recommended.map((f: any, idx: number) => (
-            <Link key={f.id} href={`/facilities/${f.id}`} className="group block overflow-hidden">
-              <div className={`${idx === 0 ? "aspect-[3/4]" : "aspect-[4/3]"} relative overflow-hidden bg-[var(--color-bg-alt)]`}>
-                {f.image_url ? (
-                  <Image src={f.image_url} alt={f.name} fill className="object-cover group-hover:scale-[1.04] transition-transform duration-700" sizes="33vw" unoptimized />
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center" style={{ background: TEAL_MID }}>
-                    <span className="font-serif text-6xl text-white/8">{f.name.charAt(0)}</span>
-                  </div>
-                )}
-                {f.total_score != null && (
-                  <span className="absolute top-3 right-3 text-xs px-3 py-1 bg-white/93 text-[var(--color-accent)] font-medium">
-                    {(f.total_score as number).toFixed(1)}
-                  </span>
-                )}
-              </div>
-              <div className="pt-4 pb-2">
-                <h3 className="font-serif text-[1.15rem] font-medium group-hover:text-[var(--color-accent)] transition-colors mb-1 leading-snug">{f.name}</h3>
-                <p className="text-[0.78rem] text-[var(--color-text-muted)] mb-2">{f.prefecture} {f.city}{f.founded_year ? ` / ${f.founded_year}年創業` : ""}</p>
-                <p className="text-[0.9rem] text-[var(--color-text-muted)] leading-relaxed line-clamp-2">{f.overview}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+      <TodaysPick candidates={recommended} accentBg={TEAL_MID} />
 
       {/* ━━━ QUIZ ━━━ teal bg — hero tone */}
       <section className="py-24" style={{ background: TEAL_MID }}>

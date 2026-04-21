@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import facilities from "@/data/facilities.json";
+import RegionalPick from "@/components/RegionalPick";
 
 const seedColors = [
   "#F0A671", "#F2C792", "#F1C189", "#CEA26F", "#F8CDAC", "#F0BE83",
@@ -53,7 +54,7 @@ export default function RegionalPage({
 
   // Regional recommendations (random 3 with photos)
   const withPhotos = dining.filter((f) => f.image_url && f.image_url.startsWith("http") && !f.image_url.includes("unsplash.com") && f.total_score && f.total_score >= 3.0);
-  const recommended = [...withPhotos].sort(() => Math.random() - 0.5).slice(0, 3);
+  const recommended = [...withPhotos].sort(() => Math.random() - 0.5).slice(0, 10);
 
   return (
     <div>
@@ -106,34 +107,7 @@ export default function RegionalPage({
         <>
           {/* Regional Recommendations */}
           {recommended.length > 0 && (
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-              <div className="mb-8">
-                <p className="text-[0.7rem] tracking-[0.3em] text-[var(--color-accent)] mb-2 uppercase font-medium">{regionNameEn} Pick</p>
-                <h2 className="font-serif text-[clamp(1.5rem,4vw,2.5rem)] font-bold leading-[1.15] text-[var(--color-text)]">{regionName}のおすすめ</h2>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                {recommended.map((f: any, idx: number) => (
-                  <Link key={f.id} href={`/facilities/${f.id}`} className="group block bg-white border border-[var(--color-border)] overflow-hidden transition-colors">
-                    <div className="aspect-[16/9] relative overflow-hidden">
-                      {f.image_url && (
-                        <Image src={f.image_url} alt={f.name} fill className="object-cover group-hover:scale-[1.04] transition-transform duration-500" sizes="33vw" unoptimized />
-                      )}
-                      {!f.image_url && (
-                        <div className="absolute inset-0 flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${seedColors[idx % 12]}40, ${seedColors[(idx+5) % 12]}40)` }}>
-                          <span className="font-serif text-4xl" style={{ color: `${seedColors[(idx+2) % 12]}50` }}>{f.name.charAt(0)}</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-serif text-[1.15rem] font-medium leading-snug text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors mb-1">{f.name}</h3>
-                      <p className="text-[0.78rem] text-[var(--color-text-muted)] mb-2">{f.prefecture} {f.city}</p>
-                      <p className="text-[0.9rem] text-[var(--color-text-muted)] leading-relaxed line-clamp-2">{f.overview}</p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </section>
+            <RegionalPick candidates={recommended} regionName={regionName} regionNameEn={regionNameEn} />
           )}
           {Object.entries(byPref)
             .sort(([, a], [, b]) => b.length - a.length)
